@@ -1,0 +1,110 @@
+﻿@model List<Usuario>
+@{
+    ViewData["Title"] = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Lista de Usuarios</h1>
+
+
+<div class="card">
+
+
+
+    <div class="card-body">
+
+      @*   <a asp-action="Guardar" asp-controller="Usuario" class="btn btn-success">
+            Crear Nuevo
+        </a> *@
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-3">
+                    <label for="opcion">Buscar por</label>
+                    <select class="form-control" id="opcion" onchange="onSearchChanged()">
+                        <option value="-2">Listar todo</option>
+                        <option value="1">Nombre(s)</option>
+                        <option value="2">Número de documento</option>
+                        <option value="3">Email</option>
+                        <option value="4">Nacionalidad</option>
+                    </select>
+                </div>
+                <div class="col-md-5 d-none" id="buscarFields">
+                    <label>&nbsp;</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Ingresar criterio de búsqueda" id="buscarCriterio" />
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button" onclick="onSearchChanged()">Buscar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr />
+      
+        <div class="table-responsive">
+
+            <table class="table table-bordered table-striped">
+
+                <thead>
+                    <tr class="table-primary">
+
+                        <th>Acciones</th>
+                        <th>Nombre</th>
+                        <th>Número de documento</th>
+                        <th>Email</th>
+                        <th>Establecimiento</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <form asp-action="Editar" asp-controller="Usuario" method="post">
+                                    <button type="submit" class="btn btn-outline-info" asp-route-IdUsuario="@item.IdUsuario">
+                                        <i class="fa fa-pencil"></i> Revisar
+                                    </button>
+                                </form>                             
+                            </td>
+                            <td>@item.CiUsuario</td>
+                            <td>@item.NombresUsuario</td>
+                            <td>@item.ApellidosUsuario</td>
+                            <td></td>
+                            <td>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="switch1">
+                                    <label class="form-check-label" for="switch1">Activo</label>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function onSearchChanged() {
+        var selectElement = document.getElementById('opcion');
+        var searchFields = document.getElementById('buscarFields');
+
+        if (selectElement.value === '-2') {
+            searchFields.classList.add('d-none');
+        } else {
+            searchFields.classList.remove('d-none');
+        }
+    }
+
+    function onSearch() {
+        // Aquí puedes agregar la lógica para realizar la búsqueda
+        var criterio = document.getElementById('buscarCriterio').value;
+        alert('Buscar por: ' + criterio);
+    }
+</script>

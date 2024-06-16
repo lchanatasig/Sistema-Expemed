@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+::after,
+::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 1rem;
+    color:black;
+}
+h2 {
+    font-weight: 600;
+    font-size: 1rem;
+}
+h3 {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+
+}
+
+
+
+.wrapper {
+    display: flex;
+}
+
+/* Sidebar styles */
+#sidebar {
+    width: 70px;
+    min-width: 70px;
+    z-index: 1000;
+    transition: all 0.25s ease-in-out;
+    background: rgb(32, 198, 186);
+    background: linear-gradient(90deg, rgba(32, 198, 186, 1) 0%, rgba(18, 158, 186, 1) 50%, rgba(0, 153, 222, 1) 100%);
+    display: flex;
+    flex-direction: column;
+    position: fixed; /* Fixed position to stay in place */
+    top: 0;
+    left: 0;
+    padding-top: 20px;
+    height: 100vh;
+}
+
+/* Main content styles */
+.main {
+    min-height: 100vh;
+    width: calc(100% - 70px); /* Subtract sidebar width */
+    overflow: hidden;
+    position: relative; /* Ensure proper positioning of absolute content */
+    transition: all 0.35s ease-in-out;
+    background-image: url('images/doctor-with-stethoscope-hands-hospital-background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-left: 70px; /* Match sidebar width */
+}
+
+    .main::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.3); /* Semi-transparent white background */
+    }
+
+    /* Additional styles for the content within .main */
+    .main .container-fluid {
+        position: relative; /* Ensure proper positioning of the content */
+        z-index: 1; /* Ensure content is above the background overlay */
+        padding: 20px; /* Optional padding for the content */
+        color: #fff; /* White text color for better readability */
+    }
+
+
+
+
+    #sidebar.expand {
+        width: 260px;
+        min-width: 260px;
+    }
+
+.toggle-btn {
+    background-color: transparent;
+    cursor: pointer;
+    border: 0;
+    padding: 1rem 1.5rem;
+}
+
+    .toggle-btn i {
+        font-size: 1.5rem;
+        color: #FFF;
+    }
+
+.sidebar-logo {
+    margin: auto 0;
+}
+
+    .sidebar-logo a {
+        color: #FFF;
+        font-size: 1.15rem;
+        font-weight: 600;
+    }
+
+#sidebar:not(.expand) .sidebar-logo,
+#sidebar:not(.expand) a.sidebar-link span {
+    display: none;
+}
+
+.sidebar-nav {
+    padding: 2rem 0;
+    flex: 1 1 auto;
+}
+
+a.sidebar-link {
+    padding: .625rem 1.625rem;
+    margin-top: 25px;
+    color: #FFF;
+    display: block;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    border-left: 3px solid transparent;
+}
+
+.sidebar-link i {
+    font-size: 1.1rem;
+    margin-right: .75rem;
+}
+
+a.sidebar-link:hover {
+    background-color: rgba(255, 255, 255, .075);
+    border-left: 3px solid #ffffff;
+}
+
+.sidebar-item {
+    position: relative;
+}
+
+#sidebar:not(.expand) .sidebar-item .sidebar-dropdown {
+    position: absolute;
+    top: 0;
+    left: 70px;
+    background-color: #0e2238;
+    padding: 0;
+    min-width: 15rem;
+    display: none;
+}
+
+#sidebar:not(.expand) .sidebar-item:hover .has-dropdown + .sidebar-dropdown {
+    display: block;
+    max-height: 15em;
+    width: 100%;
+    opacity: 1;
+}
+
+#sidebar.expand .sidebar-link[data-bs-toggle="collapse"]::after {
+    border: solid;
+    border-width: 0 .075rem .075rem 0;
+    content: "";
+    display: inline-block;
+    padding: 2px;
+    position: absolute;
+    right: 1.5rem;
+    top: 1.4rem;
+    transform: rotate(-135deg);
+    transition: all .2s ease-out;
+}
+
+#sidebar.expand .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
+    transform: rotate(45deg);
+    transition: all .2s ease-out;
+}
+
+.container-fluid {
+    backdrop-filter: blur(10px); /* Aplica un ligero desenfoque para suavizar el fondo */
+    background-color: rgb(255, 255, 255, 0.23); /* Fondo semi-transparente blanco */
+    border-radius: 10px; /* Bordes redondeados para un aspecto más suave */
+    box-shadow: 0 4px 8px rgb(0, 0, 0, 0.42); /* Sombra ligera para levantar el contenedor */
+    padding: 30px; /* Espacio interior aumentado para mejor legibilidad */
+    margin-top: 100px; /* Espacio superior */
+    max-width: 900px; /* Ancho máximo para evitar que el contenedor se extienda demasiado */
+    margin-left: auto; /* Centra horizontalmente */
+    margin-right: auto; /* Centra horizontalmente */
+}
+
+@media (max-width: 768px) {
+    .container-fluid {
+        padding: 20px; /* Reducción del espacio interior en dispositivos más pequeños */
+    }
+}
+
