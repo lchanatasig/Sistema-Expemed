@@ -180,7 +180,7 @@ namespace Sistema_Expermed.Datos
 
                     SqlCommand cmd = new SqlCommand("SP_INSERTAR_PACIENTES", conexion);
 
-                    cmd.Parameters.AddWithValue("@fechacreacion_pacientes", gpaciente.FechaCreacionPacientes);
+                    cmd.Parameters.AddWithValue("@fechacreacion_pacientes", DateTime.Today);
                     cmd.Parameters.AddWithValue("@usuariocreacion_pacientes", gpaciente.UsuarioCreacionPacientes);
                     cmd.Parameters.AddWithValue("@activo_pacientes", gpaciente.ActivoPacientes);
                     cmd.Parameters.AddWithValue("@tipodocumento_pacientes_c", gpaciente.TipoDocumentoPacientesC);
@@ -239,53 +239,48 @@ namespace Sistema_Expermed.Datos
                     conexion.Open();
 
                     SqlCommand cmd = new SqlCommand("SP_EDITAR_PACIENTES", conexion);
-
-                    cmd.Parameters.AddWithValue("Id Paciente", opaciente.IdPacientes);
-                    cmd.Parameters.AddWithValue("Usuario Creacion", opaciente.UsuarioCreacionPacientes);
-                    cmd.Parameters.AddWithValue("Fecha Modificacion", DateTime.Now);
-                    cmd.Parameters.AddWithValue("Usuario Modificacion", opaciente.UsuarioModificacionPacientes);
-                    cmd.Parameters.AddWithValue("Activo", opaciente.ActivoPacientes);
-                    cmd.Parameters.AddWithValue("Tipo Documento", opaciente.TipoDocumentoPacientesC);
-                    cmd.Parameters.AddWithValue("Cedula", opaciente.CiPacientes);
-                    cmd.Parameters.AddWithValue("Primer Nombre", opaciente.PrimerNombrePacientes);
-                    cmd.Parameters.AddWithValue("Segundo Nombre", opaciente.SegundoNombrePacientes);
-                    cmd.Parameters.AddWithValue("Primer Apellido", opaciente.PrimerApellidoPacientes);
-                    cmd.Parameters.AddWithValue("Segundo Apellido", opaciente.SegundoApellidoPacientes);
-                    cmd.Parameters.AddWithValue("Sexo", opaciente.SexoPacientesC);
-                    cmd.Parameters.AddWithValue("Fecha Nacimiento", opaciente.FechaNacimientoPacientes);
-                    cmd.Parameters.AddWithValue("Edad", opaciente.Edad);
-                    cmd.Parameters.AddWithValue("Tipo Sangre", opaciente.TipoSangrePacientesC);
-                    cmd.Parameters.AddWithValue("Donante", opaciente.DonantePacientes);
-                    cmd.Parameters.AddWithValue("Estado Civil", opaciente.EstadoCivilPacientesC);
-                    cmd.Parameters.AddWithValue("Formacion Profecional", opaciente.FormacionProfesionalPacientesC);
-                    cmd.Parameters.AddWithValue("Telefono Fijo", opaciente.TelefonoFijoPacientes);
-                    cmd.Parameters.AddWithValue("Telefono Celular", opaciente.TelefonoCelularPacientes);
-                    cmd.Parameters.AddWithValue("Email", opaciente.EmailPacientes);
-                    cmd.Parameters.AddWithValue("Nacionalidad", opaciente.NacionalidadPacientesL);
-                    cmd.Parameters.AddWithValue("Provincia", opaciente.ProvinciaPacientesL);
-                    cmd.Parameters.AddWithValue("Direccion", opaciente.DireccionPacientes);
-                    cmd.Parameters.AddWithValue("Ocupacion", opaciente.OcupacionPacientes);
-                    cmd.Parameters.AddWithValue("Empresa", opaciente.EmpresaPacientes);
-                    cmd.Parameters.AddWithValue("Seguro", opaciente.SeguroSaludPacientesC);
-
                     cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@IdPacientes", opaciente.IdPacientes);
+                    cmd.Parameters.AddWithValue("@FechaCreacionPacientes", opaciente.FechaCreacionPacientes); // Adding the missing parameter
+                    cmd.Parameters.AddWithValue("@UsuarioCreacionPacientes", opaciente.UsuarioCreacionPacientes);
+                    cmd.Parameters.AddWithValue("@FechaModificacionPacientes", DateTime.Now);
+                    cmd.Parameters.AddWithValue("@UsuarioModificacionPacientes", opaciente.UsuarioModificacionPacientes);
+                    cmd.Parameters.AddWithValue("@ActivoPacientes", opaciente.ActivoPacientes);
+                    cmd.Parameters.AddWithValue("@TipoDocumentoPacientesC", opaciente.TipoDocumentoPacientesC);
+                    cmd.Parameters.AddWithValue("@CiPacientes", opaciente.CiPacientes);
+                    cmd.Parameters.AddWithValue("@PrimerNombrePacientes", opaciente.PrimerNombrePacientes);
+                    cmd.Parameters.AddWithValue("@SegundoNombrePacientes", opaciente.SegundoNombrePacientes);
+                    cmd.Parameters.AddWithValue("@PrimerApellidoPacientes", opaciente.PrimerApellidoPacientes);
+                    cmd.Parameters.AddWithValue("@SegundoApellidoPacientes", opaciente.SegundoApellidoPacientes);
+                    cmd.Parameters.AddWithValue("@SexoPacientesC", opaciente.SexoPacientesC);
+                    cmd.Parameters.AddWithValue("@FechaNacimientoPacientes", opaciente.FechaNacimientoPacientes);
+                    cmd.Parameters.AddWithValue("@Edad", opaciente.Edad);
+                    cmd.Parameters.AddWithValue("@TipoSangrePacientesC", opaciente.TipoSangrePacientesC);
+                    cmd.Parameters.AddWithValue("@DonantePacientes", opaciente.DonantePacientes);
+                    cmd.Parameters.AddWithValue("@EstadoCivilPacientesC", opaciente.EstadoCivilPacientesC);
+                    cmd.Parameters.AddWithValue("@FormacionProfesionalPacientesC", opaciente.FormacionProfesionalPacientesC);
+                    cmd.Parameters.AddWithValue("@TelefonoFijoPacientes", opaciente.TelefonoFijoPacientes);
+                    cmd.Parameters.AddWithValue("@TelefonoCelularPacientes", opaciente.TelefonoCelularPacientes);
+                    cmd.Parameters.AddWithValue("@EmailPacientes", opaciente.EmailPacientes);
+                    cmd.Parameters.AddWithValue("@NacionalidadPacientesL", opaciente.NacionalidadPacientesL);
+                    cmd.Parameters.AddWithValue("@ProvinciaPacientesL", opaciente.ProvinciaPacientesL);
+                    cmd.Parameters.AddWithValue("@DireccionPacientes", opaciente.DireccionPacientes);
+                    cmd.Parameters.AddWithValue("@OcupacionPacientes", opaciente.OcupacionPacientes);
+                    cmd.Parameters.AddWithValue("@EmpresaPacientes", opaciente.EmpresaPacientes);
+                    cmd.Parameters.AddWithValue("@SeguroSaludPacientesC", opaciente.SeguroSaludPacientesC);
+
                     cmd.ExecuteNonQuery();
                 }
                 rpta = true;
-
-
             }
-
             catch (Exception e)
             {
                 string error = e.Message;
                 rpta = false;
-
             }
 
             return rpta;
-
-
         }
 
 

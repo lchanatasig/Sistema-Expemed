@@ -43,8 +43,9 @@ namespace Sistema_Expermed.Models
         // Constructor que inicializa la fecha de creación con la fecha actual
         public Paciente()
         {
-            FechaCreacionPacientes = DateTime.Today;
+          
             FechaModificacionPacientes = DateTime.Today;
+            UsuarioCreacionPacientes = "Admin";
          
             ActivoPacientes = 1;
         }

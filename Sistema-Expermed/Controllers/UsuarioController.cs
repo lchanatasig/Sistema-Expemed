@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol.Plugins;
 using Sistema_Expermed.Datos;
 using Sistema_Expermed.Models;
 using System.Data;
@@ -111,32 +112,33 @@ namespace Sistema_Expermed.Controllers
         }
         //FIN ELIMINAR
 
-        public IActionResult Acceso()
-        {
-            //lista de Usuarios
-           
 
+
+
+        // GET: Usuario/Login
+        public IActionResult Login()
+        {
             return View();
         }
+
+        // POST: Usuario/Login
         [HttpPost]
-        public ActionResult Acceso(string loginUsuario, string clave)
+        public IActionResult Login(Usuario loginRequest)
         {
-            string perfilUsuario = new UsuarioDatos().ValidarCredenciales(loginUsuario, clave);
+           
 
-            if (perfilUsuario != "0")
+            int perfilUsuario;
+            var isValid = _UsuarioDatos.ValidarCredenciales(loginRequest.LoginUsuario, loginRequest.ClaveUsuario, out perfilUsuario);
+
+            if (!isValid || perfilUsuario == 0)
             {
-                // Login successful, redirect to dashboard or profile page
-                return RedirectToAction("Dashboard", "Home");
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                return View();
             }
-            else
-            {
-                // Login failed, display error message
-                ViewBag.ErrorMessage = "Invalid username or password";
-                return View("Login");
-            }
+
+            // Si las credenciales son válidas, redirigir a una acción adecuada
+            return RedirectToAction("Index", "Home");
         }
-
-
 
 
     }
