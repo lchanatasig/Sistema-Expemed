@@ -136,6 +136,8 @@ namespace Sistema_Expermed.Controllers
                 return View();
             }
 
+            // Guardar el perfil del usuario en la sesión
+            HttpContext.Session.SetInt32("PerfilUsuario", perfilUsuario);
             // Si las credenciales son válidas, redirigir a una acción adecuada
             return RedirectToAction("Index", "Home");
         }
