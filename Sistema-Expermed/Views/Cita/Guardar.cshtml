@@ -1,0 +1,42 @@
+﻿@model Cita //llamado a las propiedades
+@{
+    ViewData["Title"] = "UsuarioGuardar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Crear Nueva Cita</h2>
+
+<form asp-action="Guardar" method="post">
+    <div class="form-group">
+        <label asp-for="FechadelacitaCitas">Fecha de la Cita:</label>
+        <input asp-for="FechadelacitaCitas" class="form-control" />
+        <span asp-validation-for="FechadelacitaCitas" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="MedicoCitasU">ID del Médico:</label>
+        <input asp-for="MedicoCitasU" class="form-control" />
+        <span asp-validation-for="MedicoCitasU" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PacienteCitasP">ID del Paciente:</label>
+        <input asp-for="PacienteCitasP" class="form-control" readonly />
+        <span asp-validation-for="PacienteCitasP" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ConsultaCitasCo">ID de la Consulta:</label>
+        <input asp-for="ConsultaCitasCo" class="form-control" />
+        <span asp-validation-for="ConsultaCitasCo" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TipoconsultaCitasCa">ID del Tipo de Consulta:</label>
+        <input asp-for="TipoconsultaCitasCa" class="form-control" />
+        <span asp-validation-for="TipoconsultaCitasCa" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="EspecialidadCitasCa">ID de la Especialidad:</label>
+        <input asp-for="EspecialidadCitasCa" class="form-control" />
+        <span asp-validation-for="EspecialidadCitasCa" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar Cita</button>
+</form>

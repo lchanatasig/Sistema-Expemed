@@ -1,0 +1,48 @@
+﻿@model Cita
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Editar</h1>
+
+<div class="container-fluid" id="formContainer" style="display: block;">
+
+
+    <form asp-action="Editar" asp-controller="Cita" method="post">
+        <div class="form-group">
+            <label for="fechaCreacion">Fecha de Creación</label>
+            <input type="text" asp-for="FechacreacionCitas" class="form-control" id="fechaCreacion" name="FechacreacionCitas" readonly>
+        </div>
+        <div class="form-group">
+            <label for="usuarioCreacion">Usuario de Creación</label>
+            <input type="text" class="form-control" asp-for="UsuarioCreacionCitas" id="usuarioCreacion" name="UsuarioCreacionCitas" required>
+        </div>
+        <div class="form-group">
+            <label for="fechaDeLaCita">Fecha de la Cita</label>
+            <input type="datetime-local" class="form-control" asp-for="FechadelacitaCitas" id="fechaDeLaCita" name="FechaDeLaCitaCitas" required>
+        </div>
+        <div class="form-group">
+            <label for="medicoCitas">Médico</label>
+            <input type="number" class="form-control" asp-for="MedicoCitasU" id="medicoCitas" name="MedicoCitasU" required>
+        </div>
+        <div class="form-group">
+            <label for="pacienteCitas">Paciente</label>
+            <input type="number" class="form-control" asp-for="PacienteCitasP" id="pacienteCitas" name="PacienteCitasP" required>
+        </div>
+        <div class="form-group">
+            <label for="consultaCitas">Consulta</label>
+            <input type="number" class="form-control" asp-for="ConsultaCitasCo" id="consultaCitas" name="ConsultaCitasCo" required>
+        </div>
+        <div class="form-group">
+            <label for="tipoconsultaCitas">Tipo de Consulta</label>
+            <input type="number" class="form-control" asp-for="TipoconsultaCitasCa" id="tipoconsultaCitas" name="TipoconsultaCitasCa" required>
+        </div>
+        <div class="form-group">
+            <label for="especialidadCitas">Especialidad</label>
+            <input type="number" class="form-control" id="especialidadCitas" asp-for="EspecialidadCitasCa" name="EspecialidadCitasCa" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Generar Cita</button>
+    </form>
+
+</div>

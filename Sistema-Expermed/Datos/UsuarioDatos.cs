@@ -1,6 +1,9 @@
-﻿using Sistema_Expermed.Models;
+﻿using Microsoft.Data.SqlClient;
+using Sistema_Expermed.Models;
 using System.Data;
-using Microsoft.Data.SqlClient;
+
+// Add this line
+
 
 namespace Sistema_Expermed.Datos
 
@@ -192,45 +195,44 @@ namespace Sistema_Expermed.Datos
                 {
                     conexion.Open();
 
-                    SqlCommand cmd = new SqlCommand("EDITAR_USUARIO", conexion);
+                    using (SqlCommand cmd = new SqlCommand("EDITAR_USUARIO", conexion))
+                    {
+                        // Add the parameters required by the stored procedure
+                        cmd.Parameters.AddWithValue("@id_usuario", eusuario.IdUsuario); // Ensure this is included
+                        cmd.Parameters.AddWithValue("@ci_usuario", eusuario.CiUsuario);
+                        cmd.Parameters.AddWithValue("@nombres_usuario", eusuario.NombresUsuario);
+                        cmd.Parameters.AddWithValue("@apellidos_usuario", eusuario.ApellidosUsuario);
+                        cmd.Parameters.AddWithValue("@telefono_usuario", eusuario.TelefonoUsuario);
+                        cmd.Parameters.AddWithValue("@email_usuario", eusuario.EmailUsuario);
+                        cmd.Parameters.AddWithValue("@establecimiento_usuario", eusuario.EstablecimientoUsuario);
+                        cmd.Parameters.AddWithValue("@direcccionestable_usuario", eusuario.direcccionestable_usuario);
+                        cmd.Parameters.AddWithValue("@ciudad_usuario", eusuario.ciudad_usuario);
+                        cmd.Parameters.AddWithValue("@provincia_usuario", eusuario.provincia_usuario);
+                        cmd.Parameters.AddWithValue("@fechamodificacion_usuario", DateTime.Now);
+                        cmd.Parameters.AddWithValue("@login_usuario", eusuario.LoginUsuario);
+                        cmd.Parameters.AddWithValue("@clave_usuario", eusuario.ClaveUsuario);
+                        cmd.Parameters.AddWithValue("@activo_usuario", eusuario.ActivoUsuario);
+                        cmd.Parameters.AddWithValue("@perfil_usuario_p", eusuario.PerfilUsuarioP);
+                        cmd.Parameters.AddWithValue("@descripcionperfil_usuario", eusuario.descripcionperfil_usuario);
+                        cmd.Parameters.AddWithValue("@codigo_usuario", eusuario.CodigoUsuario);
 
-
-                    cmd.Parameters.AddWithValue("@ci_usuario", eusuario.CiUsuario);
-                    cmd.Parameters.AddWithValue("@nombres_usuario", eusuario.NombresUsuario);
-                    cmd.Parameters.AddWithValue("@apellidos_usuario", eusuario.ApellidosUsuario);
-                    cmd.Parameters.AddWithValue("@telefono_usuario", eusuario.TelefonoUsuario);
-                    cmd.Parameters.AddWithValue("@email_usuario", eusuario.EmailUsuario);
-                    cmd.Parameters.AddWithValue("@establecimiento_usuario", eusuario.EstablecimientoUsuario);
-                    cmd.Parameters.AddWithValue("@direcccionestable_usuario", eusuario.direcccionestable_usuario);
-                    cmd.Parameters.AddWithValue("@ciudad_usuario", eusuario.ciudad_usuario);
-                    cmd.Parameters.AddWithValue("@provincia_usuario", eusuario.provincia_usuario);
-                    cmd.Parameters.AddWithValue("@fechacreacion_usuario", eusuario.FechacreacionUsuario);
-                    cmd.Parameters.AddWithValue("@fechamodificacion_usuario", eusuario.FechamodificacionUsuario);
-                    cmd.Parameters.AddWithValue("@login_usuario", eusuario.LoginUsuario);
-                    cmd.Parameters.AddWithValue("@clave_usuario", eusuario.ClaveUsuario);
-                    cmd.Parameters.AddWithValue("@activo_usuario", eusuario.ActivoUsuario);
-                    cmd.Parameters.AddWithValue("@perfil_usuario_p", eusuario.PerfilUsuarioP);
-                    cmd.Parameters.AddWithValue("@descripcionperfil_usuario", eusuario.descripcionperfil_usuario);
-                    cmd.Parameters.AddWithValue("@codigo_usuario", eusuario.CodigoUsuario);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.ExecuteNonQuery();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.ExecuteNonQuery();
+                    }
                 }
+
                 rpta = true;
-
-
             }
-
             catch (Exception e)
             {
                 string error = e.Message;
                 rpta = false;
-
             }
 
             return rpta;
-
-
         }
+
+
 
 
         public bool Eliminar(int idusuario)
@@ -299,6 +301,39 @@ namespace Sistema_Expermed.Datos
 
             return perfiles;
         }
+
+        public string ValidarCredenciales(string loginUsuario, string clave)
+        {
+            string perfilUsuario = string.Empty;
+
+            try
+            {
+                var cn = new Conexion();
+
+                using (var conexion = new SqlConnection(cn.getCadenaSQL()))
+                {
+                    conexion.Open();
+
+                    using (SqlCommand cmd = new SqlCommand("sp_ValidarCredenciales", conexion))
+                    {
+                        cmd.Parameters.AddWithValue("@login_usuario", loginUsuario);
+                        cmd.Parameters.AddWithValue("@clave", clave);
+
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        perfilUsuario = (string)cmd.ExecuteScalar();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                string error = e.Message;
+                perfilUsuario = "0";
+            }
+
+            return perfilUsuario;
+        }
+
 
 
 

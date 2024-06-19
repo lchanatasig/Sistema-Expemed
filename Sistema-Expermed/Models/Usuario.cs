@@ -32,8 +32,8 @@ namespace Sistema_Expermed.Models
 
         public Usuario()
         {
-            
-            //UsuarioCreacionPacientes = "Admin";
+
+        
             ActivoUsuario = 1;
         }
 

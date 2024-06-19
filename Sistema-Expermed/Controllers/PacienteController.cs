@@ -14,6 +14,8 @@ namespace Sistema_Expermed.Controllers
         {
             //lista de Usuarios
             var oLista = _PacienteDatos.Listar();
+            var nacionalidad = _PacienteDatos.ObtenerNacionalidad();
+            ViewData["Nacionalidades"] = nacionalidad;
 
 
             return View(oLista);
@@ -23,6 +25,8 @@ namespace Sistema_Expermed.Controllers
         //INICIO GUARDAR
         public IActionResult Guardar()
         {
+            var nacionalidad = _PacienteDatos.ObtenerNacionalidad();
+            ViewData["Nacionalidades"] = nacionalidad;
             //devuelve vista html
             return View();
         }
@@ -64,8 +68,8 @@ namespace Sistema_Expermed.Controllers
         {
             //guardar usuario
 
-            if (!ModelState.IsValid) //Valida si esta vacio el campo
-                return View();
+            //if (!ModelState.IsValid) //Valida si esta vacio el campo
+            //    return View();
 
             var respuesta = _PacienteDatos.Editar(ePaciente);
 

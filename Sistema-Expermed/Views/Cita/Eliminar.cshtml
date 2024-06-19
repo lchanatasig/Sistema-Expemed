@@ -1,0 +1,21 @@
+﻿@model Cita
+@{
+    ViewData["Title"] = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Eliminar</h1>
+
+<div class="card-body">
+    <form asp-action="Eliminar" asp-controller="Cita" method="post">
+
+        <input asp-for="IdCitas" type="hidden" class="form-control" /> <!--//referencia id /oculto con hidden -->
+        <div class="alert alert-danger" role="alert">
+            ¿Desea eliminar el contacto: @Html.DisplayTextFor(model => model.UsuarioCreacionCitas)
+        </div>
+
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a asp-action="Listar" asp-controller="Paciente" class="btn btn-warning">Volver a la lista</a>
+    </form>
+
+</div>

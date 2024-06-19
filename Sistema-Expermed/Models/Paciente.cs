@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Sistema_Expermed.Models;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace Sistema_Expermed.Models
 {
@@ -35,12 +37,15 @@ namespace Sistema_Expermed.Models
         public string? EmpresaPacientes { get; set; }
         public string? SeguroSaludPacientesC { get; set; }
 
+        // Relación con citas (si es necesario)
+     
 
         // Constructor que inicializa la fecha de creación con la fecha actual
         public Paciente()
         {
             FechaCreacionPacientes = DateTime.Today;
-            UsuarioCreacionPacientes = "Admin";
+            FechaModificacionPacientes = DateTime.Today;
+         
             ActivoPacientes = 1;
         }
 

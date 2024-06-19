@@ -238,12 +238,11 @@ namespace Sistema_Expermed.Datos
                 {
                     conexion.Open();
 
-                    SqlCommand cmd = new SqlCommand("EDITAR_PACIENTE", conexion);
+                    SqlCommand cmd = new SqlCommand("SP_EDITAR_PACIENTES", conexion);
 
-
-                    cmd.Parameters.AddWithValue("Fecha Creacion", opaciente.FechaCreacionPacientes);
+                    cmd.Parameters.AddWithValue("Id Paciente", opaciente.IdPacientes);
                     cmd.Parameters.AddWithValue("Usuario Creacion", opaciente.UsuarioCreacionPacientes);
-                    cmd.Parameters.AddWithValue("Fecha Modificacion", opaciente.FechaModificacionPacientes);
+                    cmd.Parameters.AddWithValue("Fecha Modificacion", DateTime.Now);
                     cmd.Parameters.AddWithValue("Usuario Modificacion", opaciente.UsuarioModificacionPacientes);
                     cmd.Parameters.AddWithValue("Activo", opaciente.ActivoPacientes);
                     cmd.Parameters.AddWithValue("Tipo Documento", opaciente.TipoDocumentoPacientesC);
@@ -324,6 +323,38 @@ namespace Sistema_Expermed.Datos
             return rpta;
 
 
+        }
+
+
+        public List<Localidad> ObtenerNacionalidad()
+        {
+            var nacionalidad = new List<Localidad>();
+            var cn = new Conexion();
+
+            using (var conexion = new SqlConnection(cn.getCadenaSQL()))
+            {
+                conexion.Open();
+
+                using (var cmd = new SqlCommand("SP_LISTAR_LOCALIDAD", conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    using (var dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            var localidad = new Localidad
+                            {
+                                IdLocalidad = Convert.ToInt32(dr["id_localidad"]),
+                                GentilicioLocalidad = dr["gentilicio_localidad"].ToString()
+                            };
+                            nacionalidad.Add(localidad);
+                        }
+                    }
+                }
+            }
+
+            return nacionalidad;
         }
 
     }

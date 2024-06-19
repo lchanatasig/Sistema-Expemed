@@ -1,0 +1,243 @@
+﻿@model Paciente
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form asp-action="Editar" asp-controller="Paciente" method="post">
+    <div class="hr-text">
+        <hr>
+        <span><i class="fas fa-user"></i> Datos Personales</span>
+        <hr>
+    </div>
+    <div class="form-group row g-3">
+
+
+        <div class="form-group col-sm-3" hidden>
+            <label for="fechaCreacionInput" class="form-label">Fecha de Creación</label>
+            <input type="text" asp-for="IdPacientes" class="form-control" id="fechaCreacionInput" readonly />
+        </div>
+
+        <div class="form-group col-sm-3" hidden>
+            <label for="fechaCreacionInput" class="form-label">Fecha de Creación</label>
+            <input type="text" asp-for="FechaCreacionPacientes" class="form-control" id="fechaCreacionInput" readonly />
+        </div>
+
+
+
+        <div class="form-group col-sm-3">
+            <label for="primerApellidoInput" class="form-label">Primer apellido *</label>
+            <input type="text" asp-for="PrimerApellidoPacientes" class="form-control" id="primerApellidoInput" placeholder="Ej:Ortega" required>
+        </div>
+        <div class="form-group col-sm-3">
+            <label for="segundoApellidoInput" class="form-label">Segundo apellido</label>
+            <input type="text" asp-for="SegundoApellidoPacientes" class="form-control" id="segundoApellidoInput" placeholder="Ej:Díaz">
+        </div>
+
+
+        <div class="form-group col-sm-3">
+            <label for="primerNombreInput" class="form-label">Primer nombre *</label>
+            <input type="text" asp-for="PrimerNombrePacientes" class="form-control" id="primerNombreInput" placeholder="Ej:Juan" required>
+        </div>
+        <div class="form-group col-sm-3">
+            <label for="segundoNombreInput" class="form-label">Segundo nombre</label>
+            <input type="text" asp-for="SegundoNombrePacientes" class="form-control" id="segundoNombreInput" placeholder="Ej:Manuel">
+        </div>
+
+
+        <div class="form-group col-sm-3">
+            <label for="tipoDocumentoSelect" class="form-label">Tipo documento *</label>
+            <select class="form-select" asp-for="TipoDocumentoPacientesC" id="tipoDocumentoSelect" required>
+                <option value="">Seleccione...</option>
+                <option value="1">Cédula de identidad</option>
+                <option value="2">Cédula de ciudadanía</option>
+                <option value="3">Pasaporte</option>
+            </select>
+        </div>
+        <div class="form-group col-sm-3">
+            <label for="numeroDocumentoInput" class="form-label">Número de documento *</label>
+            <input type="text" asp-for="CiPacientes" class="form-control" id="numeroDocumentoInput" placeholder="Ej:1819912335" required>
+            @*             <span asp-validation-for="CiPacientes" class="text-danger"></span> <!--//Validacion de campo obligatorio -->
+            *@
+        </div>
+
+
+
+
+        <div class="form-group col-sm-3">
+            <label for="tipoSangreSelect" class="form-label">Tipo de sangre</label>
+            <select class="form-select" asp-for="TipoSangrePacientesC" id="tipoSangreSelect" required>
+                <option value="">Seleccione...</option>
+                <option value="1">O+</option>
+                <option value="2">O-</option>
+                <option value="3">A+</option>
+                <option value="4">A-</option>
+                <option value="5">B+</option>
+                <option value="6">B-</option>
+                <option value="7">AB+</option>
+                <option value="8">AB-</option>
+            </select>
+        </div>
+
+        <div class="form-group col-sm-3">
+            <label for="donanteSelect" class="form-label">Es donante</label>
+            <select class="form-select" asp-for="DonantePacientes" id="donanteSelect" required>
+                <option value="">Seleccione...</option>
+                <option value="true">Sí</option>
+                <option value="false">No</option>
+            </select>
+        </div>
+
+
+        <div class="form-group col-sm-3">
+            <label for="fechaNacimientoInput" class="form-label">Fecha nacimiento</label>
+            <input asp-for="FechaNacimientoPacientes" class="form-control" asp-format="{0:yyyy-MM-dd}" />
+        </div>
+
+        <div class="form-group col-sm-2">
+            <label for="edadInput" class="form-label">Edad</label>
+            <input type="number" class="form-control" id="edadInput" asp-for="Edad" placeholder="Ej:23">
+        </div>
+
+
+        <div class="form-group col-sm-2">
+            <label for="sexoSelect" class="form-label">Sexo</label>
+            <select class="form-select" asp-for="SexoPacientesC" id="sexoSelect">
+                <option value="">Seleccione...</option>
+                <option value="1">Masculino</option>
+                <option value="2">Femenino</option>
+            </select>
+        </div>
+        <div class="form-group col-sm-3">
+            <label for="estadoCivilSelect" class="form-label">Estado civil</label>
+            <select class="form-select" asp-for="EstadoCivilPacientesC" id="estadoCivilSelect">
+                <option value="">Seleccione...</option>
+                <option value="1">Soltero</option>
+                <option value="2">Casado</option>
+                <option value="3">Divorciado</option>
+                <option value="4">Viudo</option>
+            </select>
+        </div>
+
+        <style>
+            .hr-text {
+                display: flex;
+                align-items: center;
+                text-align: center;
+            }
+
+                .hr-text hr {
+                    margin: 0;
+                    flex: 1;
+                }
+
+                .hr-text span {
+                    padding: 0 10px;
+                    font-size: 18px;
+                }
+        </style>
+        <div class="form-group col-sm-3">
+            <label for="formacionProfesionalSelect" class="form-label">Formación profesional</label>
+            <select class="form-select" asp-for="FormacionProfesionalPacientesC" id="formacionProfesionalSelect" required>
+                <option value="">Seleccione...</option>
+                <option value="Primaria">Primaria</option>
+                <option value="Secundaria">Secundaria</option>
+                <option value="Tecnico">Técnico</option>
+                <option value="Tecnologo">Tecnólogo</option>
+                <option value="Universitario">Universitario</option>
+                <option value="Postgrado">Postgrado</option>
+                <option value="Maestria">Maestría</option>
+                <option value="Doctorado">Doctorado</option>
+            </select>
+        </div>
+    </div>
+    <div class="hr-text">
+        <hr>
+        <span><i class="fas fa-address-book"></i> Datos de Contacto</span>
+        <hr>
+    </div>
+
+
+    <div class="form-group row g-3">
+        <div class="form-group col-sm-3">
+            <label for="nacionalidadSelect" class="form-label">Nacionalidad</label>
+            <select class="form-select" asp-for="NacionalidadPacientesL" id="nacionalidadSelect" required>
+                <option value="">Seleccione...</option>
+                <option value="1">Ecuador, ecuatoriano(a)</option>
+                <option value="2">Argentina, argentino(a)</option>
+                <option value="3">Bolivia, boliviano(a)</option>
+                <option value="4">Brasil, brasileño(a)</option>
+                <option value="5">Chile, chileno(a)</option>
+                <option value="6">Colombia, colombiano(a)</option>
+                <option value="7">Paraguay, paraguayo(a)</option>
+                <option value="8">Perú, peruano(a)</option>
+                <option value="9">Uruguay, uruguayo(a)</option>
+                <option value="10">Venezuela, venezolano(a)</option>
+                <!-- Agrega más opciones según sea necesario -->
+            </select>
+        </div>
+
+
+
+        <div class="form-group col-sm-3">
+            <label for="provinciaSelect" class="form-label">Provincia / Cantón / Parroquia</label>
+            <select class="form-select" asp-for="ProvinciaPacientesL" id="provinciaSelect" required>
+                <option value="">Seleccione...</option>
+                <option value="1">Pichincha, Quito, Pomasqui</option>
+                <option value="2">Guayas, Guayaquil, Tarqui</option>
+                <option value="3">Azuay, Cuenca, Bellavista</option>
+                <option value="4">Manabí, Portoviejo, San Pablo</option>
+                <option value="5">El Oro, Machala, La Providencia</option>
+                <option value="6">Loja, Loja, El Valle</option>
+                <!-- Agrega más opciones según sea necesario -->
+            </select>
+        </div>
+
+        <div class="form-group col-sm-3">
+            <label for="direccionInput" class="form-label">Dirección</label>
+            <input type="text" class="form-control" asp-for="DireccionPacientes" id="direccionInput" placeholder="Ej:Calle A">
+        </div>
+
+
+        <div class="form-group col-sm-3">
+            <label for="telefonoInput" class="form-label">Teléfono</label>
+            <input type="text" class="form-control" id="telefonoInput" asp-for="TelefonoFijoPacientes" placeholder="Máximo 20 caracteres" maxlength="20">
+        </div>
+        <div class="form-group col-sm-3">
+            <label for="celularInput" class="form-label">Teléfono celular</label>
+            <input type="text" class="form-control" asp-for="TelefonoCelularPacientes" id="celularInput" placeholder="Ej:9888888888">
+        </div>
+
+
+        <div class="form-group col-sm-3">
+            <label for="emailInput" class="form-label">Email *</label>
+            <input type="email" class="form-control" id="emailInput" asp-for="EmailPacientes" placeholder="Ej:juanmanuel@gmail.com" required>
+        </div>
+
+
+        <div class="form-group col-sm-3">
+            <label for="ocupacionInput" class="form-label">Ocupación</label>
+            <input type="text" class="form-control" id="ocupacionInput" asp-for="OcupacionPacientes" placeholder="Máximo 300 caracteres">
+        </div>
+        <div class="form-group col-sm-3">
+            <label for="empresaInput" class="form-label">Empresa</label>
+            <input type="text" class="form-control" id="empresaInput" asp-for="EmpresaPacientes" placeholder="Máximo 300 caracteres">
+        </div>
+
+        <div class="form-group col-sm-3">
+            <label for="seguroSaludInput" class="form-label">Seguro de salud</label>
+            <input type="text" class="form-control" id="seguroSaludInput" asp-for="SeguroSaludPacientesC" placeholder="Ej:Ninguno">
+        </div>
+
+
+
+
+    </div>
+
+
+
+
+    <br />
+    <button type="submit" class="btn btn-success col-sm-2"><i class="fas fa-save me-1"></i>Guardar</button>
+@*     <a asp-action="GenerarCita" asp-controller="Cita" asp-route-idPaciente="@Model.IdPacientes" class="btn btn-outline-primary">Generar Cita</a>
+ *@    <a asp-action="Listar" asp-controller="Paciente" class="btn btn-outline-warning">Volver a la lista</a>
+</form>

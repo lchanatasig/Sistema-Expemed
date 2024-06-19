@@ -1,0 +1,111 @@
+﻿@model List<Paciente>
+@{
+    ViewData["Title"] = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var nacionalidades = ViewData["Nacionalidades"] as List<Localidad>;
+}
+
+
+
+
+
+
+    <h3>Lista de pacientes</h3>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-3">
+                <label for="opcion">Buscar por</label>
+                <select class="form-control" id="opcion" onchange="onSearchChanged()">
+                    <option value="-2">Listar todo</option>
+                    <option value="1">Nombre(s)</option>
+                    <option value="2">Número de documento</option>
+                    <option value="3">Email</option>
+                    <option value="4">Nacionalidad</option>
+                </select>
+            </div>
+            <div class="col-md-5 d-none" id="buscarFields">
+                <label>&nbsp;</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Ingresar criterio de búsqueda" id="buscarCriterio" />
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" onclick="onSearchChanged()">Buscar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-info" role="alert">
+        <i class="far fa-calendar-alt"></i>
+        <div class="content">
+            <div class="header">
+                Para generar una cita debes
+            </div>
+            <p>Guardar o seleccionar el registro de un (o una) paciente para que se habilite el botón <i class="fas fa-calendar"></i><strong>Generar cita</strong>.</p>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Acciones</th>
+                    <th>Nombre</th>
+                    <th>Número de documento</th>
+                    <th>Email</th>
+                    <th>Nacionalidad</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a asp-action="Editar" asp-controller="Paciente" class="btn btn-outline-primary" asp-route-IdPaciente="@item.IdPacientes"> 
+                                <i class="fa fa-pencil-square"></i> Revisar</a>
+@*                             <a asp-action="Eliminar" asp-controller="Paciente" class="btn btn-danger btn-sm" asp-route-IdPaciente="@item.IdPacientes"> Eliminar</a>
+ *@                        </td>
+                        <td>@item.PrimerNombrePacientes @item.PrimerApellidoPacientes</td>
+                        <td>@item.CiPacientes</td>
+                        <td>@item.EmailPacientes</td>
+                        <td>
+                        @if (nacionalidades != null)
+                        {
+                            foreach (var nacionalidad in nacionalidades)
+                            {
+                               
+                                    @nacionalidad.GentilicioLocalidad
+                              
+                            }
+                        }
+
+
+                        </td>
+                    <td>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="switch1" name="ActivoPacientes"
+                            @(item.ActivoPacientes == 1 ? "checked" : "")>
+                            <label class="form-check-label" for="switch1">Activo</label>
+                        </div>
+                    </td>
+
+
+
+                    </tr>
+                }
+
+               
+            </tbody>
+
+     
+        </table>
+
+    <a asp-action="Guardar" asp-controller="Paciente" class="btn btn-outline-primary" style="margin-left:80%">
+      <i class="fa fa-plus"></i> Añadir nuevo paciente
+    </a>
+  
+    </div>
+

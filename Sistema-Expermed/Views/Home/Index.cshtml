@@ -14,7 +14,8 @@
                             <i class="fas fa-calendar-alt"></i>
                             No hay citas programadas para hoy
                         </h5>
-                        <a class="btn btn-outline-primary" href="@Url.Action("Pacientes", "Home")">
+                    <a class="btn btn-outline-primary" asp-area="" asp-controller="Paciente" asp-action="Listar">
+                       
                             <i class="fa fa-plus"></i>
                             Agendar nueva cita
                         </a>
@@ -25,13 +26,13 @@
                 <div class="col-md-6">
                     <p>Más acciones</p>
                     <div class="btn-group">
-                        <a class="btn btn-secondary" href="@Url.Action("Citas", "Home")">
+                    <a class="btn btn-outline-primary" asp-area="" asp-controller="Cita" asp-action="Listar">
                             <i class="far fa-calendar-check"></i>
                             Consultar citas
                         </a>
 
                         <div class="btn btn-light">o</div>
-                        <a class="btn btn-secondary" href="@Url.Action("Consultas", "Home")">
+                    <a class="btn btn-outline-primary" asp-area="" asp-controller="Consulta" asp-action="Guardar">
                             <i class="fa fa-user-md "></i>
                             Generar una consulta
                         </a>

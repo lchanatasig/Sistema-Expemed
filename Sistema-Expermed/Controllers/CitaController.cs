@@ -9,102 +9,104 @@ namespace Sistema_Expermed.Controllers
     public class CitaController : Controller
     {
         CitaDatos _CitaDatos = new CitaDatos();
-        //INICIO LISTAR
+        // INICIO LISTAR
         public IActionResult Listar()
         {
-            //lista de Usuarios
             var oLista = _CitaDatos.Listar();
-
-
             return View(oLista);
         }
-        //FIN LISTAR
+        // FIN LISTAR
 
-        //INICIO GUARDAR
-        public IActionResult Guardar()
+        // INICIO GUARDAR
+        public IActionResult Guardar(int IdPacientes)
         {
-            //devuelve vista html
-            return View();
+          
+
+            var cita = new Cita
+            {
+                PacienteCitasP = IdPacientes, // Asignar el id del paciente recibido al atributo de la cita
+               
+            };
+
+            return View(cita); // Devolver la vista con el objeto de cita creado para que se pueda confirmar o modificar antes de guardar
         }
 
         [HttpPost]
         public IActionResult Guardar(Cita gCita)
         {
-            //guardar usuario
+            if (!ModelState.IsValid)
+            {
+                return View(gCita);
+            }
 
-            //if (!ModelState.IsValid) //Valida si esta vacio el campo
-            //    return View();
+            // Aquí podrías cargar los detalles del paciente si es necesario
+            var paciente = _CitaDatos.ObtenerP(gCita.PacienteCitasP); // Ejemplo: función hipotética para obtener detalles del paciente
+
+            // Si necesitas realizar alguna validación adicional o cargar más detalles del paciente antes de guardar, hazlo aquí.
 
             var respuesta = _CitaDatos.Guardar(gCita);
 
-
             if (respuesta)
+            {
                 return RedirectToAction("Listar");
+            }
             else
-
-                return View();
+            {
+                return View(gCita);
+            }
         }
 
-        //FIN GUARDAR
+        // FIN GUARDAR
 
-        //INICIO EDITAR
-        public IActionResult Editar(int IdCita)
+        // INICIO EDITAR
+        public IActionResult Editar(int IdCitas)
         {
-            //devuelve vista html
-
-            var eCita = _CitaDatos.Obtener(IdCita);
+            var eCita = _CitaDatos.Obtener(IdCitas);
             return View(eCita);
-
         }
-
 
         [HttpPost]
         public IActionResult Editar(Cita edCita)
         {
-            //guardar usuario
-
-            if (!ModelState.IsValid) //Valida si esta vacio el campo
-                return View();
+            if (!ModelState.IsValid)
+            {
+                return View(edCita);
+            }
 
             var respuesta = _CitaDatos.Editar(edCita);
 
-
             if (respuesta)
+            {
                 return RedirectToAction("Listar");
+            }
             else
-
-                return View();
+            {
+                return View(edCita);
+            }
         }
-        //FIN EDITAR
+        // FIN EDITAR
 
-
-        //INICIO ELIMINAR
+        // INICIO ELIMINAR
         public IActionResult Eliminar(int IdCitas)
         {
-            //devuelve vista html
-
             var eCita = _CitaDatos.Obtener(IdCitas);
             return View(eCita);
-
         }
-        
-        
 
         [HttpPost]
         public IActionResult Eliminar(Cita eCita)
         {
-            //guardar usuario
-
-
             var respuesta = _CitaDatos.Eliminar(eCita.IdCitas);
 
-
             if (respuesta)
+            {
                 return RedirectToAction("Listar");
+            }
             else
-
-                return View();
+            {
+                return View(eCita);
+            }
         }
-        //FIN ELIMINAR
+        // FIN ELIMINAR
     }
 }

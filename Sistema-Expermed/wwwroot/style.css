@@ -10,6 +10,27 @@
 
 a {
     text-decoration: none;
+    font-size: 12px;
+}
+
+    a.btn.btn-outline-primary {
+        text-decoration: none;
+        font-size: 12px;
+    }
+
+    a.btn.btn-outline-warning {
+        text-decoration: none;
+        font-size: 12px;
+    }
+
+    a.btn.btn-warning {
+        text-decoration: none;
+        font-size: 12px;
+    }
+
+.btn-success {
+    text-decoration: none;
+    font-size: 12px;
 }
 
 li {
@@ -17,13 +38,13 @@ li {
 }
 
 h1 {
-    font-weight: 600;
-    font-size: 1rem;
+    font-weight: 400;
+    font-size: 30px;
     color: black;
 }
 
 h2 {
-    font-weight: 600;
+    font-weight: 400;
     font-size: 1rem;
 }
 
@@ -32,12 +53,61 @@ h3 {
     font-size: 1rem;
 }
 
+th {
+    font-weight: 400;
+    font-size: 12px;
+}
+
+td {
+    font-weight: 400;
+    font-size: 14px;
+}
+
+opcion {
+    font-weight: 400;
+    font-size: 12px;
+}
+
 body {
     font-family: "Merriweather", serif;
     font-weight: 300;
     font-style: italic;
 }
 
+p {
+    font-weight: 400;
+    font-size: 16px;
+}
+
+form-label {
+    font-weight: 400;
+    font-size: 12px;
+}
+
+button.btn.btn-primary.nextBtn.btn-lg.ms-3 {
+    font-weight: 400;
+    font-size: 12px;
+}
+
+button.btn.btn-primary.previousBtn.btn-lg {
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.form-control {
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.form-select {
+    font-weight: 400;
+    font-size: 12px;
+}
+
+.ui.list .item {
+    color: inherit !important; /* Hereda el color del texto */
+    text-decoration: none !important; /* Quita el subrayado */
+}
 
 
 .wrapper {
@@ -194,12 +264,12 @@ a.sidebar-link:hover {
 
 .container-fluid {
     backdrop-filter: blur(10px); /* Aplica un ligero desenfoque para suavizar el fondo */
-    background-color: rgb(255, 255, 255, 0.23); /* Fondo semi-transparente blanco */
+    background-color: rgb(165, 165, 165, 0.42); /* Fondo semi-transparente blanco */
     border-radius: 10px; /* Bordes redondeados para un aspecto más suave */
-    box-shadow: 0 4px 8px rgb(0, 0, 0, 0.42); /* Sombra ligera para levantar el contenedor */
+    box-shadow: 0 4px 8px rgb(0, 0, 0, 0.67); /* Sombra ligera para levantar el contenedor */
     padding: 30px; /* Espacio interior aumentado para mejor legibilidad */
     margin-top: 100px; /* Espacio superior */
-    max-width: 900px; /* Ancho máximo para evitar que el contenedor se extienda demasiado */
+    max-width: 2000px; /* Ancho máximo para evitar que el contenedor se extienda demasiado */
     margin-left: auto; /* Centra horizontalmente */
     margin-right: auto; /* Centra horizontalmente */
 }
@@ -207,5 +277,14 @@ a.sidebar-link:hover {
 @media (max-width: 768px) {
     .container-fluid {
         padding: 20px; /* Reducción del espacio interior en dispositivos más pequeños */
+    }
+}
+
+/* Login*/
+
+
+@media screen and (max-width: 600px) {
+    .form-03-main {
+        width: 100%;
     }
 }

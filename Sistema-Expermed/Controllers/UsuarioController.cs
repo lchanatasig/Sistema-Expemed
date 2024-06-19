@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Sistema_Expermed.Datos;
 using Sistema_Expermed.Models;
+using System.Data;
 
 
 namespace Sistema_Expermed.Controllers
@@ -109,6 +110,34 @@ namespace Sistema_Expermed.Controllers
                 return View();
         }
         //FIN ELIMINAR
+
+        public IActionResult Acceso()
+        {
+            //lista de Usuarios
+           
+
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Acceso(string loginUsuario, string clave)
+        {
+            string perfilUsuario = new UsuarioDatos().ValidarCredenciales(loginUsuario, clave);
+
+            if (perfilUsuario != "0")
+            {
+                // Login successful, redirect to dashboard or profile page
+                return RedirectToAction("Dashboard", "Home");
+            }
+            else
+            {
+                // Login failed, display error message
+                ViewBag.ErrorMessage = "Invalid username or password";
+                return View("Login");
+            }
+        }
+
+
+
 
     }
 }

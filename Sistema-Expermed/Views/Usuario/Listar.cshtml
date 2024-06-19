@@ -7,11 +7,6 @@
 <h1>Lista de Usuarios</h1>
 
 
-<div class="card">
-
-
-
-    <div class="card-body">
 
         @*   <a asp-action="Guardar" asp-controller="Usuario" class="btn btn-success">
         Crear Nuevo
@@ -71,13 +66,16 @@
                             <td>@item.CiUsuario</td>
                             <td>@item.NombresUsuario</td>
                             <td>@item.ApellidosUsuario</td>
-                            <td></td>
+                            <td>@item.EstablecimientoUsuario
+                            </td>
                             <td>
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" id="switch1" name="ActivoUsuario"
                                     @(item.ActivoUsuario == 1 ? "checked" : "")>
                                     <label class="form-check-label" for="switch1">Activo</label>
                                 </div>
+@*                                 <a asp-action="Eliminar" asp-controller="Usuario" class="btn btn-danger btn-sm" asp-route-IdUsuario="@item.IdUsuario"> Eliminar</a>
+ *@
                             </td>
 
                         </tr>
@@ -92,7 +90,7 @@
     <a asp-action="Guardar" asp-controller="Usuario" class="btn btn-success">
         Crear Nuevo
     </a>
-</div>
+
 
 <script>
     function onSearchChanged() {

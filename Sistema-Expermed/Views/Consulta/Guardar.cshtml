@@ -1,0 +1,968 @@
+﻿@{
+    ViewData["Title"] = "Guardar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Wizard con Grid</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.5.2/css/bootstrap.min.css">
+    <style>
+        .stepwizard-step p {
+            margin-top: 10px;
+        }
+
+        .stepwizard-row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-circle {
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            padding: 6px 0;
+            font-size: 12px;
+            line-height: 1.328571329;
+            border-radius: 20px;
+            background-color: dodgerblue;
+        }
+
+        .hr-text {
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+            .hr-text hr {
+                margin: 0;
+                flex: 1;
+            }
+
+            .hr-text span {
+                padding: 0 10px;
+                font-size: 18px;
+            }
+    </style>
+
+</head>
+
+<div class="container mt-5">
+    <div class="stepwizard">
+        <div class="stepwizard-row">
+            <div class="stepwizard-step">
+                <button type="button" class="btn btn-primary btn-circle" data-step="1">1</button>
+                <p>Datos del paciente</p>
+            </div>
+            <div class="stepwizard-step">
+                <button type="button" class="btn btn-secondary btn-circle" data-step="2" disabled="disabled">2</button>
+                <p>Datos consulta</p>
+            </div>
+            <div class="stepwizard-step">
+                <button type="button" class="btn btn-secondary btn-circle" data-step="3" disabled="disabled">3</button>
+                <p>Signos vitales</p>
+            </div>
+            <div class="stepwizard-step">
+                <button type="button" class="btn btn-secondary btn-circle" data-step="4" disabled="disabled">4</button>
+                <p>Diagnóstico</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="hr-text">
+        <hr>
+
+        <hr>
+    </div>
+    <form role="form">
+        <!--Inicia Primer formulario-->
+        <div class="setup-content" id="step-1">
+            <div class="hr-text">
+                <hr>
+                <span><i class="fas fa-user"></i> Datos Personales</span>
+                <hr>
+            </div>
+            <div class="row g-3">
+                <div class="col-sm-3">
+                    <label for="primerApellido">Primer apellido</label>
+                    <input type="text" class="form-control" id="primerApellido" placeholder="Máximo 200 caracteres">
+                </div>
+                <div class="col-sm-3">
+                    <label for="segundoApellido">Segundo apellido</label>
+                    <input type="text" class="form-control" id="segundoApellido" placeholder="Máximo 200 caracteres">
+                </div>
+                <div class="col-sm-3">
+                    <label for="primerNombre">Primer nombre</label>
+                    <input type="text" class="form-control" id="primerNombre" placeholder="Máximo 200 caracteres">
+                </div>
+                <div class="col-sm-3">
+                    <label for="segundoNombre">Segundo nombre</label>
+                    <input type="text" class="form-control" id="segundoNombre" placeholder="Máximo 150 caracteres">
+                </div>
+                <div class="col-sm-2">
+                    <button type="button" class="btn btn-primary btn-block">Buscar</button>
+                </div>
+                <div class="col-sm-3">
+                    <label for="segundoNombre">Tipo documento</label>
+                    <input type="text" class="form-control" id="segundoNombre" placeholder="Máximo 150 caracteres">
+                </div>
+                <div class="col-sm-3">
+                    <label for="segundoNombre">Número de documento</label>
+                    <input type="text" class="form-control" id="segundoNombre" placeholder="Máximo 150 caracteres">
+                </div>
+                <div class="col-sm-3">
+                    <label for="tipoSangre">Tipo de sangre</label>
+                    <select class="form-select" id="tipoSangre">
+                        <option value="">Seleccione</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <label for="esdonante">Es donante</label>
+                    <select class="form-select" id="tipoSangre">
+                        <option value="">Seleccione</option>
+                        <option value="Si">Si+</option>
+                        <option value="No-">No-</option>
+
+                    </select>
+                </div>
+
+                <div class="col-sm-3">
+                    <label for="segundoNombre">Fecha de nacimiento</label>
+                    <input type="date" class="form-control" id="segundoNombre" placeholder="Máximo 150 caracteres">
+                </div>
+
+                <div class="col-sm-3">
+                    <label for="segundoNombre">Edad</label>
+                    <input type="number" class="form-control" id="segundoNombre" placeholder="Máximo 150 caracteres">
+                </div>
+                <div class="col-sm-3">
+                    <label for="esdonante">Sexo</label>
+                    <select class="form-select" id="tipoSangre">
+                        <option value="">Seleccione</option>
+                        <option value="1">Masculino</option>
+                        <option value="2">Femenino-</option>
+
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <label for="esdonante">Estado civil</label>
+                    <select class="form-select" id="tipoSangre">
+                        <option value="">Seleccione</option>
+                        <option value="1">Casado</option>
+                        <option value="2">Soltero-</option>
+                        <option value="3">Viudo-</option>
+
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <label for="esdonante"> Formacion profesional</label>
+                    <select class="form-select" id="tipoSangre">
+                        <option value="">Seleccione</option>
+                        <option value="1">Universitario</option>
+                        <option value="2">Tecnologo</option>
+                        <option value="3">Bachiller</option>
+
+                    </select>
+                </div>
+
+
+                <div class="hr-text">
+                    <hr>
+                    <span><i class="fas fa-address-book"></i> Datos de Contacto</span>
+                    <hr>
+                </div>
+
+
+                <div class="col-sm-3">
+                    <label for="segundoNombre">Nacionalidad</label>
+                    <input type="search" class="form-control" id="segundoNombre" placeholder="Máximo 150 caracteres">
+                </div>
+
+                <div class="col-sm-3">
+                    <label for="segundoNombre">Direccion</label>
+                    <input type="search" class="form-control" id="segundoNombre" placeholder="Máximo 150 caracteres">
+                </div>
+
+                <div class="col-sm-3">
+                    <label for="segundoNombre">Telefono</label>
+                    <input type="number" class="form-control" id="segundoNombre" placeholder="Máximo 150 caracteres">
+                </div>
+                <div class="col-sm-3">
+                    <label for="segundoNombre">Telefono Celular</label>
+                    <input type="number" class="form-control" id="segundoNombre" placeholder="Máximo 150 caracteres">
+                </div>
+
+                <div class="col-sm-3">
+                    <label for="segundoNombre">Email</label>
+                    <input type="email" class="form-control" id="segundoNombre" placeholder="Máximo 150 caracteres">
+                </div>
+
+                <div class="col-sm-3">
+                    <label for="segundoNombre">Ocupación</label>
+                    <input type="text" class="form-control" id="segundoNombre" placeholder="Máximo 150 caracteres">
+                </div>
+
+                <div class="col-sm-3">
+                    <label for="segundoNombre">Empresa</label>
+                    <input type="text" class="form-control" id="segundoNombre" placeholder="Máximo 150 caracteres">
+                </div>
+
+                <div class="col-sm-3">
+                    <label for="esdonante"> Seguro de salud</label>
+                    <select class="form-select" id="tipoSangre">
+                        <option value="">Seleccione</option>
+                        <option value="1">IESS</option>
+                        <option value="2">Seguro Privado</option>
+
+                    </select>
+                </div>
+
+
+                <div class="col-sm-3">
+                    <label for="segundoNombre">Historia Clínica</label>
+                    <input type="text" class="form-control" id="segundoNombre" placeholder="Máximo 150 caracteres">
+                </div>
+            </div>
+
+            <div class="text-end mt-3">
+                <a asp-action="Listar" asp-controller="Consulta" class="btn btn-outline-secondary"><i class="fa fa-close"></i> Salir</a>
+
+                <button class="btn btn-primary nextBtn btn-lg ms-3" type="button">Siguiente <i class="fa fa-arrow-right"></i></button>
+            </div>
+        </div>
+        <!--Final primer formulario-->
+        <!--Inicia segundo formulario-->
+        <div class="setup-content" id="step-2" style="display: none;">
+            <h3> Datos consulta</h3>
+            <div class="row g-3">
+                <div class="one field">
+                    <div class="field">
+                        <table class="ui very basic collapsing celled table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-user"></i>
+                                                <div class="content">
+                                                    <div class="header">Paciente</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-id-card"></i>
+                                                <div class="content">
+                                                    <div class="header">Número de documento</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-venus-mars"></i>
+                                                <div class="content">
+                                                    <div class="header">Sexo</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-tint"></i>
+                                                <div class="content">
+                                                    <div class="header">Tipo de sangre</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-calendar-alt"></i>
+                                                <div class="content">
+                                                    <div class="header">Fecha de nacimiento</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-calendar"></i>
+                                                <div class="content">
+                                                    <div class="header">Edad</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-id-badge"></i>
+                                                <div class="content">
+                                                    <div class="header">Estado civil</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-bookmark"></i>
+                                                <div class="content">
+                                                    <div class="header">Formación profesional</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-thumbtack"></i>
+                                                <div class="content">
+                                                    <div class="header">Nacionalidad</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-phone-square"></i>
+                                                <div class="content">
+                                                    <div class="header">Teléfono</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-mobile-alt"></i>
+                                                <div class="content">
+                                                    <div class="header">Teléfono celular</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-envelope-square"></i>
+                                                <div class="content">
+                                                    <div class="header">Email</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-sm-3">
+                    <label for="segundoNombre">Acompañante</label>
+                    <input type="text" class="form-control" id="segundoNombre" placeholder="Nombre(s),Apellido(s) 150 caracteres">
+                </div>
+                <div class="col-sm-3">
+                    <label for="esdonante"> Parentesco</label>
+                    <select class="form-select" id="tipoSangre">
+                        <option value="">Seleccione</option>
+                        <option value="1">Amigo</option>
+                        <option value="2"> Pareja</option>
+
+                    </select>
+                </div>
+
+                <div class="col-sm-3">
+                    <label for="segundoNombre">Telefono</label>
+                    <input type="number" class="form-control" id="segundoNombre" placeholder="Nombre(s),Apellido(s) 150 caracteres">
+                </div>
+
+                <div class="col-sm-3">
+                    <label for="segundoNombre">Motivo de consulta*</label>
+                    <input type="text" class="form-control" id="segundoNombre" placeholder="Nombre(s),Apellido(s) 150 caracteres">
+                </div>
+                <div class="hr-text">
+                    <hr>
+                    <span><i class="fas fa-user"></i> Antecedentes personales</span>
+                    <hr>
+                </div>
+
+                <div class="col-sm-3">
+
+                    <input type="text" class="form-control" id="segundoNombre" placeholder="Max 150 caracteres">
+                </div>
+
+                <div class="hr-text">
+                    <hr>
+                    <span><i class="fa fa-undo"></i> Antecedentes Familiares</span>
+                    <hr>
+                </div>
+                <div class="container mt-5">
+                    <div class="field">
+                        <div class="fields">
+                            <div class="col-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input consulta-antecedente-checked" type="checkbox" id="consulta-antecedente-checked_3393">
+                                    <label class="form-check-label" for="consulta-antecedente-checked_3393">Cardiopatía</label>
+                                </div>
+                            </div>
+                            <div class="col-12 consulta-antecedente-observacion" style="display: none;">
+                                <input placeholder="Observación (Máximo 300 caracteres)" type="text" id="consulta-antecedente-observacion_3393" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="col-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input consulta-antecedente-checked" type="checkbox" id="consulta-antecedente-checked_3394">
+                                    <label class="form-check-label" for="consulta-antecedente-checked_3394">Diabetes</label>
+                                </div>
+                            </div>
+                            <div class="col-12 consulta-antecedente-observacion" style="display: none;">
+                                <input placeholder="Observación (Máximo 300 caracteres)" type="text" id="consulta-antecedente-observacion_3394" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="col-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input consulta-antecedente-checked" type="checkbox" id="consulta-antecedente-checked_3395">
+                                    <label class="form-check-label" for="consulta-antecedente-checked_3395">Enfermedad Cardiovascular</label>
+                                </div>
+                            </div>
+                            <div class="col-12 consulta-antecedente-observacion" style="display: none;">
+                                <input placeholder="Observación (Máximo 300 caracteres)" type="text" id="consulta-antecedente-observacion_3395" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="col-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input consulta-antecedente-checked" type="checkbox" id="consulta-antecedente-checked_3396">
+                                    <label class="form-check-label" for="consulta-antecedente-checked_3396">Hipertensión</label>
+                                </div>
+                            </div>
+                            <div class="col-12 consulta-antecedente-observacion" style="display: none;">
+                                <input placeholder="Observación (Máximo 300 caracteres)" type="text" id="consulta-antecedente-observacion_3396" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="col-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input consulta-antecedente-checked" type="checkbox" id="consulta-antecedente-checked_3397">
+                                    <label class="form-check-label" for="consulta-antecedente-checked_3397">Cáncer</label>
+                                </div>
+                            </div>
+                            <div class="col-12 consulta-antecedente-observacion" style="display: none;">
+                                <input placeholder="Observación (Máximo 300 caracteres)" type="text" id="consulta-antecedente-observacion_3397" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="col-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input consulta-antecedente-checked" type="checkbox" id="consulta-antecedente-checked_3398">
+                                    <label class="form-check-label" for="consulta-antecedente-checked_3398">Tuberculosis</label>
+                                </div>
+                            </div>
+                            <div class="col-12 consulta-antecedente-observacion" style="display: none;">
+                                <input placeholder="Observación (Máximo 300 caracteres)" type="text" id="consulta-antecedente-observacion_3398" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="col-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input consulta-antecedente-checked" type="checkbox" id="consulta-antecedente-checked_3399">
+                                    <label class="form-check-label" for="consulta-antecedente-checked_3399">Enfermedad Mental</label>
+                                </div>
+                            </div>
+                            <div class="col-12 consulta-antecedente-observacion" style="display: none;">
+                                <input placeholder="Observación (Máximo 300 caracteres)" type="text" id="consulta-antecedente-observacion_3399" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="col-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input consulta-antecedente-checked" type="checkbox" id="consulta-antecedente-checked_3400">
+                                    <label class="form-check-label" for="consulta-antecedente-checked_3400">Enfermedad Infecciosa</label>
+                                </div>
+                            </div>
+                            <div class="col-12 consulta-antecedente-observacion" style="display: none;">
+                                <input placeholder="Observación (Máximo 300 caracteres)" type="text" id="consulta-antecedente-observacion_3400" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="col-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input consulta-antecedente-checked" type="checkbox" id="consulta-antecedente-checked_3401">
+                                    <label class="form-check-label" for="consulta-antecedente-checked_3401">Mal Formación</label>
+                                </div>
+                            </div>
+                            <div class="col-12 consulta-antecedente-observacion" style="display: none;">
+                                <input placeholder="Observación (Máximo 300 caracteres)" type="text" id="consulta-antecedente-observacion_3401" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="col-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input consulta-antecedente-checked" type="checkbox" id="consulta-antecedente-checked_3402">
+                                    <label class="form-check-label" for="consulta-antecedente-checked_3402">Otro</label>
+                                </div>
+                            </div>
+                            <div class="col-12 consulta-antecedente-observacion" style="display: none;">
+                                <input placeholder="Observación (Máximo 300 caracteres)" type="text" id="consulta-antecedente-observacion_3402" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="hr-text">
+                    <hr>
+                    <span><i class="fa fa-medkit"></i> Enfermedad o problema actual (*) </span>
+                    <hr>
+                </div>
+                <div class="col-sm-3">
+
+                    <input type="text" class="form-control" id="segundoNombre" placeholder="Max 150 caracteres">
+                </div>
+
+            </div>
+            <div class="text-end mt-3">
+
+
+                <button class="btn btn-primary previousBtn btn-lg" type="button"><i class="fa fa-arrow-left"></i> Regresar</button>
+                <button class="btn btn-primary nextBtn btn-lg ms-3" type="button">Siguiente <i class="fa fa-arrow-right"></i></button>
+            </div>
+        </div>
+        <!--Fin segundo formulario-->
+        <!--Inicia tercer formulario-->
+        <div class="setup-content" id="step-3" style="display: none;">
+            <h3>Signos vitales</h3>
+            <div class="row g-3">
+                <div class="one field">
+                    <div class="field">
+                        <table class="ui very basic collapsing celled table">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-user"></i>
+                                                <div class="content">
+                                                    <div class="header">Paciente</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-id-card"></i>
+                                                <div class="content">
+                                                    <div class="header">Número de documento</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-venus-mars"></i>
+                                                <div class="content">
+                                                    <div class="header">Sexo</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-tint"></i>
+                                                <div class="content">
+                                                    <div class="header">Tipo de sangre</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-calendar-alt"></i>
+                                                <div class="content">
+                                                    <div class="header">Fecha de nacimiento</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-calendar"></i>
+                                                <div class="content">
+                                                    <div class="header">Edad</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-id-badge"></i>
+                                                <div class="content">
+                                                    <div class="header">Estado civil</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-bookmark"></i>
+                                                <div class="content">
+                                                    <div class="header">Formación profesional</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-thumbtack"></i>
+                                                <div class="content">
+                                                    <div class="header">Nacionalidad</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-phone-square"></i>
+                                                <div class="content">
+                                                    <div class="header">Teléfono</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-mobile-alt"></i>
+                                                <div class="content">
+                                                    <div class="header">Teléfono celular</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="ui list">
+                                            <a class="item">
+                                                <i class="fas fa-envelope-square"></i>
+                                                <div class="content">
+                                                    <div class="header">Email</div>
+                                                    <div class="description">Sin especificar</div>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+                <div class="hr-text">
+                    <hr>
+                    <span><i class="fa fa-stethoscope"></i>Revisiön actual de Organos y sistemas</span>
+                    <hr>
+                </div>
+
+
+                <div class="container mt-5">
+                    <div class="field">
+                        <div class="fields">
+                            <div class="col-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input consulta-antecedente-checked" type="checkbox" id="consulta-antecedente-checked_3393">
+                                    <label class="form-check-label" for="consulta-antecedente-checked_3393">Órganos de los sentidos</label>
+                                </div>
+                            </div>
+                            <div class="col-12 consulta-antecedente-observacion" style="display: none;">
+                                <input placeholder="Observación (Máximo 300 caracteres)" type="text" id="consulta-antecedente-observacion_3393" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="col-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input consulta-antecedente-checked" type="checkbox" id="consulta-antecedente-checked_3394">
+                                    <label class="form-check-label" for="consulta-antecedente-checked_3394">Respiratorio</label>
+                                </div>
+                            </div>
+                            <div class="col-12 consulta-antecedente-observacion" style="display: none;">
+                                <input placeholder="Observación (Máximo 300 caracteres)" type="text" id="consulta-antecedente-observacion_3394" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="col-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input consulta-antecedente-checked" type="checkbox" id="consulta-antecedente-checked_3395">
+                                    <label class="form-check-label" for="consulta-antecedente-checked_3395">Cardio Vascular</label>
+                                </div>
+                            </div>
+                            <div class="col-12 consulta-antecedente-observacion" style="display: none;">
+                                <input placeholder="Observación (Máximo 300 caracteres)" type="text" id="consulta-antecedente-observacion_3395" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="col-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input consulta-antecedente-checked" type="checkbox" id="consulta-antecedente-checked_3396">
+                                    <label class="form-check-label" for="consulta-antecedente-checked_3396">Digestivo</label>
+                                </div>
+                            </div>
+                            <div class="col-12 consulta-antecedente-observacion" style="display: none;">
+                                <input placeholder="Observación (Máximo 300 caracteres)" type="text" id="consulta-antecedente-observacion_3396" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="col-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input consulta-antecedente-checked" type="checkbox" id="consulta-antecedente-checked_3397">
+                                    <label class="form-check-label" for="consulta-antecedente-checked_3397">Genital</label>
+                                </div>
+                            </div>
+                            <div class="col-12 consulta-antecedente-observacion" style="display: none;">
+                                <input placeholder="Observación (Máximo 300 caracteres)" type="text" id="consulta-antecedente-observacion_3397" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="col-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input consulta-antecedente-checked" type="checkbox" id="consulta-antecedente-checked_3398">
+                                    <label class="form-check-label" for="consulta-antecedente-checked_3398">Urinario</label>
+                                </div>
+                            </div>
+                            <div class="col-12 consulta-antecedente-observacion" style="display: none;">
+                                <input placeholder="Observación (Máximo 300 caracteres)" type="text" id="consulta-antecedente-observacion_3398" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="col-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input consulta-antecedente-checked" type="checkbox" id="consulta-antecedente-checked_3399">
+                                    <label class="form-check-label" for="consulta-antecedente-checked_3399">Músculo Esquelético</label>
+                                </div>
+                            </div>
+                            <div class="col-12 consulta-antecedente-observacion" style="display: none;">
+                                <input placeholder="Observación (Máximo 300 caracteres)" type="text" id="consulta-antecedente-observacion_3399" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="col-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input consulta-antecedente-checked" type="checkbox" id="consulta-antecedente-checked_3400">
+                                    <label class="form-check-label" for="consulta-antecedente-checked_3400">Endocrino</label>
+                                </div>
+                            </div>
+                            <div class="col-12 consulta-antecedente-observacion" style="display: none;">
+                                <input placeholder="Observación (Máximo 300 caracteres)" type="text" id="consulta-antecedente-observacion_3400" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="col-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input consulta-antecedente-checked" type="checkbox" id="consulta-antecedente-checked_3401">
+                                    <label class="form-check-label" for="consulta-antecedente-checked_3401">Hemo Linfático</label>
+                                </div>
+                            </div>
+                            <div class="col-12 consulta-antecedente-observacion" style="display: none;">
+                                <input placeholder="Observación (Máximo 300 caracteres)" type="text" id="consulta-antecedente-observacion_3401" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <div class="fields">
+                            <div class="col-3">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input consulta-antecedente-checked" type="checkbox" id="consulta-antecedente-checked_3402">
+                                    <label class="form-check-label" for="consulta-antecedente-checked_3402">Nervioso</label>
+                                </div>
+                            </div>
+                            <div class="col-12 consulta-antecedente-observacion" style="display: none;">
+                                <input placeholder="Observación (Máximo 300 caracteres)" type="text" id="consulta-antecedente-observacion_3402" class="form-control" disabled>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hr-text">
+                    <hr>
+                    <span><i class="fa fa-stethoscope"></i>Signos vitales y antropometria</span>
+                    <hr>
+                </div>
+
+
+                <div class="alert alert-info" role="alert">
+                    <i class="fa fa-calculator fa-3x"></i>
+                    <div class="content">
+                        <div class="header">
+                            Separador decimal
+                        </div>
+                        <p>Debes usar el caracter <span>(,)</span>para separa decimales </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="text-end mt-3">
+
+
+                <button class="btn btn-primary previousBtn btn-lg" type="button"><i class="fa fa-arrow-left"></i> Regresar</button>
+                <button class="btn btn-primary nextBtn btn-lg ms-3" type="button">Siguiente <i class="fa fa-arrow-right"></i></button>
+            </div>
+        </div>
+        <!--Final tercer formulario-->
+        <!--Inicia Cuarto formulario-->
+        <div class="setup-content" id="step-4" style="display: none;">
+            <h3> Diagnóstico</h3>
+            <div class="row g-3">
+                <!-- Form fields for Diagnóstico -->
+            </div>
+            <button class="btn btn-success btn-lg pull-right mt-3" type="submit">Finalizar</button>
+        </div>
+        <!--Final cuarto formulario-->
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.5.2/js/bootstrap.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var navListItems = $('div.stepwizard-step button'),
+            allWells = $('.setup-content');
+
+        allWells.hide();
+
+        // Manejo de clicks en los pasos del wizard
+        navListItems.click(function (e) {
+            e.preventDefault();
+            var $target = $('#step-' + $(this).data('step')),
+                $item = $(this);
+
+            if (!$item.hasClass('disabled')) {
+                navListItems.removeClass('btn-primary').addClass('btn-secondary');
+                $item.addClass('btn-primary');
+                allWells.hide();
+                $target.show();
+                $target.find('input:eq(0)').focus();
+            }
+        });
+
+        // Función para manejar el botón "Siguiente"
+        $('div.setup-content button.nextBtn').click(function () {
+            var curStep = $(this).closest(".setup-content"),
+                curStepBtn = curStep.attr("id"),
+                nextStepWizard = $('div.stepwizard-step button[data-step="' + (parseInt(curStepBtn.split('-')[1]) + 1) + '"]'),
+                curInputs = curStep.find("input[type='text'],input[type='url']"),
+                isValid = true;
+
+            $(".form-group").removeClass("has-error");
+            for (var i = 0; i < curInputs.length; i++) {
+                if (!curInputs[i].validity.valid) {
+                    isValid = false;
+                    $(curInputs[i]).closest(".form-group").addClass("has-error");
+                }
+            }
+
+            if (isValid) {
+                nextStepWizard.removeAttr('disabled').trigger('click');
+            }
+        });
+
+        // Función para manejar el botón "Regresar"
+        $('div.setup-content button.previousBtn').click(function () {
+            var curStep = $(this).closest(".setup-content"),
+                curStepBtn = curStep.attr("id"),
+                prevStepWizard = $('div.stepwizard-step button[data-step="' + (parseInt(curStepBtn.split('-')[1]) - 1) + '"]');
+
+            navListItems.removeClass('btn-primary').addClass('btn-secondary');
+            prevStepWizard.addClass('btn-primary');
+            allWells.hide();
+            $('#step-' + (parseInt(curStepBtn.split('-')[1]) - 1)).show();
+        });
+
+        // Mostrar u ocultar campos de observación al cambiar los switches
+        $('.consulta-antecedente-checked').change(function () {
+            var isChecked = $(this).prop('checked');
+            var $observacionField = $(this).closest('.fields').find('.consulta-antecedente-observacion');
+
+            if (isChecked) {
+                $observacionField.show(); // Mostrar el campo de observación
+                $observacionField.find('input').removeAttr('disabled'); // Habilitar el input
+            } else {
+                $observacionField.hide(); // Ocultar el campo de observación
+                $observacionField.find('input').attr('disabled', 'disabled'); // Deshabilitar el input
+            }
+        });
+
+        // Activar el primer paso al cargar la página
+        $('div.stepwizard-step button[data-step="1"]').trigger('click');
+    });
+</script>
+

@@ -1,0 +1,87 @@
+﻿@model List<Cita>
+@{
+    ViewData["Title"] = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="container-fluid">
+    <h3>Lista de citas generadas</h3>
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-3">
+                <label for="opcion">Buscar por</label>
+                <select class="form-control" id="opcion" onchange="onOpcionChanged()">
+                    <option value="-2">Listar todo</option>
+                    <option value="1">Fecha de la cita</option>
+                    <option value="2">Nombre del paciente</option>
+                    <option value="3">Nombre del Cita</option>
+                </select>
+            </div>
+            <div class="col-md-5 d-none" id="fechaFields">
+                <label>Desde / Hasta</label>
+                <div class="input-group">
+                    <input type="date" class="form-control" id="fechaInicio" />
+                    <input type="date" class="form-control" id="fechaFin" />
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" onclick="onSearchChanged()">Buscar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 d-none" id="buscarFields">
+                <label>&nbsp;</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Ingresar criterio de búsqueda" id="buscarCriterio" />
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button" onclick="onSearchChanged()">Buscar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="app-search"></div>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Acciones</th>
+                    <th>Fecha de la cita</th>
+                    <th>Nombre del paciente</th>
+                    <th>Nombre del Cita</th>
+                    <th>Motivo</th>
+                    <th>Creado por</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a asp-action="Editar" asp-controller="Cita" class="btn btn-primary btn-sm" asp-route-IdCitas="@item.IdCitas"> Editar</a>
+                            <a asp-action="Eliminar" asp-controller="Cita" class="btn btn-danger btn-sm" asp-route-IdCitas="@item.IdCitas"> Eliminar</a>
+                        </td>
+                        <td>@item.FechadelacitaCitas</td>
+                        <td>@item.PacienteCitasP</td>
+                        <td>@item.TipoconsultaCitasCa</td>
+                        <td>@item.EspecialidadCitasCa</td>
+                        <td>@item.IdCitas</td>
+
+                    </tr>
+                }
+                <a asp-action="Guardar" asp-controller="Cita" class="btn btn-success">
+                    Crear Nuevo
+                </a>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
