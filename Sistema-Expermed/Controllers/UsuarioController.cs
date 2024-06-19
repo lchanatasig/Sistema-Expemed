@@ -24,9 +24,12 @@ namespace Sistema_Expermed.Controllers
         //INICIO GUARDAR
         public IActionResult Guardar()
         {
-            //devuelve vista html
+            var perfiles = _UsuarioDatos.ObtenerPerfiles();
+            ViewData["Perfiles"] = perfiles;
+
             return View();
         }
+
 
         [HttpPost]
         public IActionResult Guardar(Usuario gUsuario)

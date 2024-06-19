@@ -150,7 +150,7 @@ namespace Sistema_Expermed.Datos
                     cmd.Parameters.AddWithValue("@direcccionestable_usuario", gusuario.direcccionestable_usuario);
                     cmd.Parameters.AddWithValue("@ciudad_usuario", gusuario.ciudad_usuario);
                     cmd.Parameters.AddWithValue("@provincia_usuario", gusuario.provincia_usuario);
-                    cmd.Parameters.AddWithValue("@fechacreacion_usuario", gusuario.FechacreacionUsuario);
+                    cmd.Parameters.AddWithValue("@fechacreacion_usuario",DateTime.Now);
 
                     cmd.Parameters.AddWithValue("@login_usuario", gusuario.LoginUsuario);
                     cmd.Parameters.AddWithValue("@clave_usuario", gusuario.ClaveUsuario);
@@ -268,6 +268,39 @@ namespace Sistema_Expermed.Datos
 
 
         }
+
+        public List<Perfil> ObtenerPerfiles()
+        {
+            var perfiles = new List<Perfil>();
+            var cn = new Conexion();
+
+            using (var conexion = new SqlConnection(cn.getCadenaSQL()))
+            {
+                conexion.Open();
+
+                using (var cmd = new SqlCommand("SP_LISTAR_PERFILES", conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    using (var dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            var perfil = new Perfil
+                            {
+                                IdPerfil = Convert.ToInt32(dr["id_perfil"]),
+                                DescripcionPerfil = dr["descripcion_perfil"].ToString()
+                            };
+                            perfiles.Add(perfil);
+                        }
+                    }
+                }
+            }
+
+            return perfiles;
+        }
+
+
 
     }
 }

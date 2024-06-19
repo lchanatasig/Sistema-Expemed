@@ -2,18 +2,24 @@
 @{
     ViewData["Title"] = "Guardar";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var perfiles = ViewData["Perfiles"] as List<Perfil>;
 }
 
 <form asp-action="Guardar" asp-controller="Usuario" method="post">
-    <div class="form-row">
+    <div class="form-row g-3">
         <div class="form-group col-sm-4">
             <label class="form-label">Rol Usuario</label>
-            <select asp-for="PerfilUsuarioP">
-                <option value="1">Admin</option>
-                <option value="2">Medico</option>
-                <option value="3">Asistente</option>
-                <option value="4">Otro</option>
-
+            <select asp-for="PerfilUsuarioP" class="form-control">
+                <option value="">Seleccione un perfil</option>
+                @if (perfiles != null)
+                {
+                    foreach (var perfil in perfiles)
+                    {
+                        <option value="@perfil.IdPerfil">
+                            @perfil.DescripcionPerfil
+                        </option>
+                    }
+                }
             </select>
         </div>
 
@@ -104,6 +110,7 @@
 
             <button type="submit" class="btn btn-primary">Grabar</button>
             <a asp-action="Listar" asp-controller="Usuario" class="btn btn-warning">Volver a la lista</a>
+      
         </div>
     </div>
 

@@ -13,8 +13,8 @@
 
     <div class="card-body">
 
-      @*   <a asp-action="Guardar" asp-controller="Usuario" class="btn btn-success">
-            Crear Nuevo
+        @*   <a asp-action="Guardar" asp-controller="Usuario" class="btn btn-success">
+        Crear Nuevo
         </a> *@
         <div class="form-group">
             <div class="row">
@@ -40,7 +40,7 @@
             </div>
         </div>
         <hr />
-      
+
         <div class="table-responsive">
 
             <table class="table table-bordered table-striped">
@@ -63,11 +63,10 @@
                     {
                         <tr>
                             <td>
-                                <form asp-action="Editar" asp-controller="Usuario" method="post">
-                                    <button type="submit" class="btn btn-outline-info" asp-route-IdUsuario="@item.IdUsuario">
-                                        <i class="fa fa-pencil"></i> Revisar
-                                    </button>
-                                </form>                             
+                                <a asp-action="Editar" asp-controller="Usuario" class="btn btn-outline-primary" asp-route-IdUsuario="@item.IdUsuario">
+                                    <i class="fa-regular fa-pen-to-square"></i> Revisar
+                                </a>
+
                             </td>
                             <td>@item.CiUsuario</td>
                             <td>@item.NombresUsuario</td>
@@ -75,10 +74,12 @@
                             <td></td>
                             <td>
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="switch1">
+                                    <input class="form-check-input" type="checkbox" id="switch1" name="ActivoUsuario"
+                                    @(item.ActivoUsuario == 1 ? "checked" : "")>
                                     <label class="form-check-label" for="switch1">Activo</label>
                                 </div>
                             </td>
+
                         </tr>
                     }
 
@@ -88,6 +89,9 @@
         </div>
     </div>
 
+    <a asp-action="Guardar" asp-controller="Usuario" class="btn btn-success">
+        Crear Nuevo
+    </a>
 </div>
 
 <script>
