@@ -352,5 +352,42 @@ namespace Sistema_Expermed.Datos
             return nacionalidad;
         }
 
+        public List<Catalogo> ObtenerCatalogo(string categoria)
+        {
+            var catalogo = new List<Catalogo>();
+            var cn = new Conexion();
+
+            using (var conexion = new SqlConnection(cn.getCadenaSQL()))
+            {
+                conexion.Open();
+
+                using (var cmd = new SqlCommand("SP_LISTAR_CATALOGO", conexion))
+                {
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    // Pasamos el parámetro de categoría al stored procedure
+                    cmd.Parameters.AddWithValue("@Categoria", categoria);
+
+                    using (var dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            var item = new Catalogo
+                            {
+                                IdCatalogo = Convert.ToInt32(dr["id_catalogo"]),
+                                Descripcion = dr["descripcion_catalogo"].ToString()
+                            };
+                            catalogo.Add(item);
+                        }
+                    }
+                }
+            }
+
+            return catalogo;
+        }
+
+
+
+
     }
 }

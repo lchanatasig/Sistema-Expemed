@@ -51,36 +51,48 @@ namespace Sistema_Expermed.Controllers
 
         //FIN GUARDAR
 
-
-        //INICIO EDITAR
+        // INICIO EDITAR
         public IActionResult Editar(int IdPaciente)
         {
-            //devuelve vista html
-
             var ePaciente = _PacienteDatos.Obtener(IdPaciente);
             return View(ePaciente);
-
         }
-
 
         [HttpPost]
         public IActionResult Editar(Paciente ePaciente)
         {
-            //guardar usuario
+            // Validar si el modelo es válido (opcional, dependiendo de tus necesidades)
+            if (!ModelState.IsValid)
+            {
+                return View(ePaciente);
+            }
 
-            //if (!ModelState.IsValid) //Valida si esta vacio el campo
-            //    return View();
+            // Obtener UsuarioModificacion de la sesión
+            string usuarioModificacion = HttpContext.Session.GetString("UsuarioModificacion");
 
+            if (string.IsNullOrEmpty(usuarioModificacion))
+            {
+                ModelState.AddModelError(string.Empty, "No se pudo obtener el usuario de modificación de la sesión.");
+                return View(ePaciente);
+            }
+
+            // Asignar UsuarioModificacion al objeto ePaciente
+            ePaciente.UsuarioModificacionPacientes = usuarioModificacion;
+
+            // Llamar al método para editar en los datos
             var respuesta = _PacienteDatos.Editar(ePaciente);
 
-
             if (respuesta)
+            {
                 return RedirectToAction("Listar");
+            }
             else
-
-                return View();
+            {
+                return View(ePaciente);
+            }
         }
-        //FIN EDITAR
+        // FIN EDITAR
+
 
         //INICIO ELIMINAR
         public IActionResult Eliminar(int IdPaciente)

@@ -8,7 +8,7 @@ builder.Services.AddRazorPages().AddRazorRuntimeCompilation(); // permite actual
 builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(5); // Configura el tiempo de expiración de la sesión
+    options.IdleTimeout = TimeSpan.FromMinutes(10); // Configura el tiempo de expiración de la sesión
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });

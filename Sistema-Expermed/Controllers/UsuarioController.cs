@@ -123,12 +123,13 @@ namespace Sistema_Expermed.Controllers
 
         // POST: Usuario/Login
         [HttpPost]
+  
         public IActionResult Login(Usuario loginRequest)
         {
-           
-
             int perfilUsuario;
-            var isValid = _UsuarioDatos.ValidarCredenciales(loginRequest.LoginUsuario, loginRequest.ClaveUsuario, out perfilUsuario);
+            string nombreUsuario;
+
+            var isValid = _UsuarioDatos.ValidarCredenciales(loginRequest.LoginUsuario, loginRequest.ClaveUsuario, out perfilUsuario, out nombreUsuario);
 
             if (!isValid || perfilUsuario == 0)
             {
@@ -138,9 +139,14 @@ namespace Sistema_Expermed.Controllers
 
             // Guardar el perfil del usuario en la sesión
             HttpContext.Session.SetInt32("PerfilUsuario", perfilUsuario);
+            // Guardar el nombre del usuario en la sesión
+            HttpContext.Session.SetString("UsuarioModificacion", nombreUsuario);
+
             // Si las credenciales son válidas, redirigir a una acción adecuada
             return RedirectToAction("Index", "Home");
         }
+
+
 
 
     }

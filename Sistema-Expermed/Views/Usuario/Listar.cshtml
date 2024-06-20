@@ -5,108 +5,159 @@
 }
 
 <h1>Lista de Usuarios</h1>
+    <style>
+    .d-none {
+        display: none;
+    }
 
-
-
-        @*   <a asp-action="Guardar" asp-controller="Usuario" class="btn btn-success">
-        Crear Nuevo
-        </a> *@
-        <div class="form-group">
-            <div class="row">
-                <div class="col-md-3">
-                    <label for="opcion">Buscar por</label>
-                    <select class="form-control" id="opcion" onchange="onSearchChanged()">
-                        <option value="-2">Listar todo</option>
-                        <option value="1">Nombre(s)</option>
-                        <option value="2">Número de documento</option>
-                        <option value="3">Email</option>
-                        <option value="4">Nacionalidad</option>
-                    </select>
-                </div>
-                <div class="col-md-5 d-none" id="buscarFields">
-                    <label>&nbsp;</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Ingresar criterio de búsqueda" id="buscarCriterio" />
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button" onclick="onSearchChanged()">Buscar</button>
-                        </div>
-                    </div>
+    .no-results {
+        text-align: center;
+        padding: 20px;
+        background-color: #f8d7da;
+        color: #721c24;
+        margin-top: 10px;
+        border: 1px solid #f5c6cb;
+        border-radius: 4px;
+    }
+    </style>
+<div class="form-group">
+    <div class="row">
+        <div class="col-md-3">
+            <label for="opcion">Buscar por</label>
+            <select class="form-control" id="opcion" onchange="onSearchChanged()">
+                <option value="-2">Listar todo</option>
+                <option value="1">Nombre(s)</option>
+                <option value="2">Número de documento</option>
+                <option value="3">Email</option>
+                <option value="4">Nacionalidad</option>
+            </select>
+        </div>
+        <div class="col-md-5 d-none" id="buscarFields">
+            <label>&nbsp;</label>
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Ingresar criterio de búsqueda" id="buscarCriterio" />
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" onclick="onSearch()">Buscar</button>
                 </div>
             </div>
         </div>
-        <hr />
+    </div>
+</div>
+<hr />
 
-        <div class="table-responsive">
-
-            <table class="table table-bordered table-striped">
-
-                <thead>
-                    <tr class="table-primary">
-
-                        <th>Acciones</th>
-                        <th>Nombre</th>
-                        <th>Número de documento</th>
-                        <th>Email</th>
-                        <th>Establecimiento</th>
-                        <th>Estado</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                <a asp-action="Editar" asp-controller="Usuario" class="btn btn-outline-primary" asp-route-IdUsuario="@item.IdUsuario">
-                                    <i class="fa-regular fa-pen-to-square"></i> Revisar
-                                </a>
-
-                            </td>
-                            <td>@item.CiUsuario</td>
-                            <td>@item.NombresUsuario</td>
-                            <td>@item.ApellidosUsuario</td>
-                            <td>@item.EstablecimientoUsuario
-                            </td>
-                            <td>
-                                <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" id="switch1" name="ActivoUsuario"
-                                    @(item.ActivoUsuario == 1 ? "checked" : "")>
-                                    <label class="form-check-label" for="switch1">Activo</label>
-                                </div>
-@*                                 <a asp-action="Eliminar" asp-controller="Usuario" class="btn btn-danger btn-sm" asp-route-IdUsuario="@item.IdUsuario"> Eliminar</a>
- *@
-                            </td>
-
-                        </tr>
-                    }
-
-                </tbody>
-
-            </table>
-        </div>
+<div class="table-responsive">
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr class="table-primary">
+                <th>Acciones</th>
+                <th>Nombre</th>
+                <th>Número de documento</th>
+                <th>Email</th>
+                <th>Establecimiento</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="@item.IdUsuario">
+                    <!-- Añade un id único para cada fila -->
+                    <td>
+                        <a asp-action="Editar" asp-controller="Usuario" class="btn btn-outline-primary" asp-route-IdUsuario="@item.IdUsuario">
+                            <i class="fa-regular fa-pen-to-square"></i> Revisar
+                        </a>
+                    </td>
+                    <td>@item.NombresUsuario</td>
+                    <td>@item.CiUsuario</td>
+                    <td>@item.EmailUsuario</td>
+                    <td>@item.EstablecimientoUsuario</td>
+                    <td>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="switch-@item.IdUsuario" name="ActivoUsuario" @(item.ActivoUsuario == 1 ? "checked" : "")>
+                            <label class="form-check-label" for="switch-@item.IdUsuario">Activo</label>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div id="noResults" class="no-results d-none">
+        No se encontraron resultados. <button onclick="crearNuevo()">Crear nuevo</button>
     </div>
 
-    <a asp-action="Guardar" asp-controller="Usuario" class="btn btn-success">
-        Crear Nuevo
-    </a>
+</div>
 
+<a asp-action="Guardar" asp-controller="Usuario" class="btn btn-success">Crear Nuevo</a>
 
 <script>
     function onSearchChanged() {
         var selectElement = document.getElementById('opcion');
         var searchFields = document.getElementById('buscarFields');
+        var tableRows = document.getElementsByTagName('tr'); // Obtén todas las filas de la tabla
 
         if (selectElement.value === '-2') {
             searchFields.classList.add('d-none');
+            // Restablece la visibilidad de todas las filas
+            for (var i = 0; i < tableRows.length; i++) {
+                var currentRow = tableRows[i];
+                if (currentRow.id !== '') { // Asegúrate de que sea una fila de datos (tiene un id)
+                    currentRow.style.display = ''; // Muestra todas las filas
+                }
+            }
+            document.getElementById('noResults').classList.add('d-none'); // Oculta el mensaje de "no resultados"
         } else {
             searchFields.classList.remove('d-none');
         }
     }
 
     function onSearch() {
-        // Aquí puedes agregar la lógica para realizar la búsqueda
-        var criterio = document.getElementById('buscarCriterio').value;
-        alert('Buscar por: ' + criterio);
+        var criterio = document.getElementById('buscarCriterio').value.toLowerCase(); // Obtén el criterio de búsqueda
+        var optionValue = document.getElementById('opcion').value; // Obtén el valor de la opción seleccionada
+
+        var tableRows = document.getElementsByTagName('tr'); // Obtén todas las filas de la tabla
+        var found = false; // Variable para rastrear si se encontró algún resultado
+
+        for (var i = 0; i < tableRows.length; i++) {
+            var currentRow = tableRows[i];
+
+            if (currentRow.id !== '') { // Asegúrate de que sea una fila de datos (tiene un id)
+                var cellValue = ''; // Valor de la celda que coincide con el criterio de búsqueda
+                switch (optionValue) {
+                    case '1': // Nombre(s)
+                        cellValue = currentRow.getElementsByTagName('td')[1].innerText.toLowerCase(); // Ajusta el índice según tu modelo
+                        break;
+                    case '2': // Número de documento
+                        cellValue = currentRow.getElementsByTagName('td')[2].innerText.toLowerCase(); // Ajusta el índice según tu modelo
+                        break;
+                    case '3': // Email
+                        cellValue = currentRow.getElementsByTagName('td')[3].innerText.toLowerCase(); // Ajusta el índice según tu modelo
+                        break;
+                    case '4': // Nacionalidad
+                        cellValue = currentRow.getElementsByTagName('td')[4].innerText.toLowerCase(); // Ajusta el índice según tu modelo
+                        break;
+                    default:
+                        break;
+                }
+
+                // Comprueba si el criterio de búsqueda coincide con el valor de la celda
+                if (cellValue.includes(criterio)) {
+                    currentRow.style.display = ''; // Muestra la fila si coincide
+                    found = true; // Se encontró al menos una coincidencia
+                } else {
+                    currentRow.style.display = 'none'; // Oculta la fila si no coincide
+                }
+            }
+        }
+
+        if (!found) {
+            document.getElementById('noResults').classList.remove('d-none'); // Muestra el mensaje de "no resultados"
+        } else {
+            document.getElementById('noResults').classList.add('d-none'); // Oculta el mensaje de "no resultados"
+        }
+    }
+
+    function crearNuevo() {
+        // Lógica para crear un nuevo registro
+        alert('Crear nuevo registro');
     }
 </script>

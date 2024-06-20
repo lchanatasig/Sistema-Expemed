@@ -303,10 +303,11 @@ namespace Sistema_Expermed.Datos
         }
 
 
-        public bool ValidarCredenciales(string loginUsuario, string clave, out int perfilUsuario)
+        public bool ValidarCredenciales(string loginUsuario, string clave, out int perfilUsuario, out string nombreUsuario)
         {
             bool rpta;
             perfilUsuario = 0;
+            nombreUsuario = string.Empty;
 
             try
             {
@@ -318,18 +319,21 @@ namespace Sistema_Expermed.Datos
 
                     SqlCommand cmd = new SqlCommand("sp_ValidarCredenciales", conexion);
                     cmd.Parameters.AddWithValue("login_usuario", loginUsuario);
-                    cmd.Parameters.AddWithValue("clave", clave);
+                    cmd.Parameters.AddWithValue("clave_usuario", clave);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    var result = cmd.ExecuteScalar();
-                    if (result != null)
+                    using (SqlDataReader reader = cmd.ExecuteReader())
                     {
-                        perfilUsuario = Convert.ToInt32(result);
-                        rpta = true;
-                    }
-                    else
-                    {
-                        rpta = false;
+                        if (reader.Read())
+                        {
+                            perfilUsuario = reader.GetInt32(0);
+                            nombreUsuario = reader.GetString(1);
+                            rpta = true;
+                        }
+                        else
+                        {
+                            rpta = false;
+                        }
                     }
                 }
             }
@@ -341,6 +345,7 @@ namespace Sistema_Expermed.Datos
 
             return rpta;
         }
+
 
 
     }
